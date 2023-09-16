@@ -14,23 +14,28 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
-
-  map.on('click', function (event) {
+  map.on("click", function (event) {
     var lat = event.latlng.lat;
     var lng = event.latlng.lng;
+    var popup = L.popup();
+    popup
+      .setLatLng(event.latlng)
+      .setContent("You've logged a visit at " + event.latlng.toString())
+      .openOn(map);
+    //alert("You clicked the map at " + lat + ", " + lng);
 
-    console.log("Lat, Lon : " + lat + ", " + lng)
+    console.log("Lat, Lon : " + lat + ", " + lng);
 
-    fetch('/api/addInteraction', {
-      method: 'POST',
+    fetch("/api/addInteraction", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       // building is hardcoded to Stud for now
       body: JSON.stringify({ lat, lng, building: "Stud" }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log("Interaction saved:", data);
       })
       .catch((error) => {

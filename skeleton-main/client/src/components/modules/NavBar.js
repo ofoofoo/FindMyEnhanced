@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+// import { Link } from "@reach/router";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "./NavBar.css";
@@ -13,9 +13,9 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
-        <Link to="/" className="NavBar-link text-color">
+        {/* <Link to="/" className="NavBar-link text-color">
           Home
-        </Link>
+        </Link> */}
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
         <span className="NavBar-link NavBar-loginbutton">

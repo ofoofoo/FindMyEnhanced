@@ -33,8 +33,8 @@ const App = () => {
     const decodedCredential = jwt_decode(userToken);
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
+      console.log(user._id, user.name);
       setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
     });
   };
 
@@ -46,8 +46,9 @@ const App = () => {
   return (
     <>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+
       <Routes>
-        <Route path="/" element={<Skeleton path="/" />} />
+        <Route path="/" element={<Skeleton />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

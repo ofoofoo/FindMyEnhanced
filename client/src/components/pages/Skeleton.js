@@ -26,16 +26,16 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
       .openOn(map);
     //alert("You clicked the map at " + lat + ", " + lng);
 
-    console.log("Lat, Lon : " + lat + ", " + lng);
-
     fetch('/buildings.json')
       .then((response) => response.json())
       .then((data) => {
-        const building = getClosestBuilding(lat, lng, 0.1, data);
-        if (building == "None") {
+        const building = getClosestBuilding(lat, lng, 10, data);
+        if (building === "None") {
           console.log("No building found");
           return;
         }
+
+        console.log("Lat:", lat, "Lng:", lng, "Building:", building);
 
         fetch("/api/addInteraction", {
           method: "POST",

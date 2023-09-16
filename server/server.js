@@ -69,11 +69,11 @@ mongoose
 const app = express();
 app.use(validator.checkRoutes);
 
+// serve static files from "public" directory
+// app.use(express.static(path.join(__dirname, 'public')));
+
 // allow us to process POST requests
 app.use(express.json());
-
-// serve static files from "public" directory
-app.use(express.static("public"));
 
 // set up a session, which will persist login data across requests
 app.use(

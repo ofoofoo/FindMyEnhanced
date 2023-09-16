@@ -1,7 +1,6 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import fetch from "node-fetch";
-import { getClosestBuilding } from "../../utils";
 
 import "../../utilities.css";
 import "./Skeleton.css";

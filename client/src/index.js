@@ -26,11 +26,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.on("click", function (event) {
   var lat = event.latlng.lat;
   var lng = event.latlng.lng;
-  var popup = L.popup();
-  popup
-    .setLatLng(event.latlng)
-    .setContent("You've logged a visit at " + event.latlng.toString())
-    .openOn(map);
+
   //alert("You clicked the map at " + lat + ", " + lng);
 
   fetch("/buildings.json")
@@ -41,6 +37,19 @@ map.on("click", function (event) {
         console.log("No building found");
         return;
       }
+      var popup = L.popup();
+      popup
+        .setLatLng(event.latlng)
+        .setContent(
+          "You've logged a visit at " +
+            building +
+            " (" +
+            lat.toFixed(7) +
+            ", " +
+            lng.toFixed(7) +
+            ")"
+        )
+        .openOn(map);
 
       console.log("Lat:", lat, "Lng:", lng, "Building:", building);
 

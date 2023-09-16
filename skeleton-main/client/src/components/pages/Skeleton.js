@@ -8,6 +8,12 @@ import "./Skeleton.css";
 const GOOGLE_CLIENT_ID = "FILL ME IN";
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
+  var map = L.map("map").setView([42.360001, -71.092003], 15);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       {userId ? (
@@ -40,6 +46,8 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
       <a href="https://docs.google.com/document/d/110JdHAn3Wnp3_AyQLkqH2W8h5oby7OVsYIeHYSiUzRs/edit?usp=sharing">
         Check out this getting started guide
       </a>
+
+      <></>
     </GoogleOAuthProvider>
   );
 };

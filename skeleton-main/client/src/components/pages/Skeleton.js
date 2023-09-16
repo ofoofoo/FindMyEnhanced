@@ -5,6 +5,8 @@ import fetch from "node-fetch";
 import "../../utilities.css";
 import "./Skeleton.css";
 
+const utils = require("../../utils");
+
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
 
@@ -18,16 +20,20 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
   map.on('click', function (event) {
     var lat = event.latlng.lat;
     var lng = event.latlng.lng;
-
     console.log("Lat, Lon : " + lat + ", " + lng)
+
+    building = utils.getClosestBuilding(lat, lng, 1000);
+    if (building == "None") {
+      console.log("No building found");
+      return;
+    }
 
     fetch('/api/addInteraction', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      // building is hardcoded to Stud for now
-      body: JSON.stringify({ lat, lng, building: "Stud" }),
+      body: JSON.stringify({ lat, lng, building }),
     })
       .then(response => response.json())
       .then(data => {

@@ -30,6 +30,7 @@ const path = require("path"); // provide utilities for working with file and dir
 
 const api = require("./api");
 const auth = require("./auth");
+const utils = require("../client/src/utils");
 
 // socket stuff
 const socketManager = require("./server-socket");
@@ -46,7 +47,7 @@ const databaseName = "MIT-heat-map";
 mongoose.set("strictQuery", false);
 
 // delete later
-const User = require("./models/user");
+// const User = require("./models/user");
 // connect to mongodb
 mongoose
   .connect(mongoConnectionURL, {

@@ -26,15 +26,14 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.on("click", function (event) {
   var lat = event.latlng.lat;
   var lng = event.latlng.lng;
-
-  //alert("You clicked the map at " + lat + ", " + lng);
-
   fetch("/buildings.json")
     .then((response) => response.json())
     .then((data) => {
       const building = getClosestBuilding(lat, lng, 10, data);
       if (building === "None") {
         console.log("No building found");
+        var popup1 = L.popup();
+        popup1.setLatLng(event.latlng).setContent("No MIT buildings nearby!").openOn(map);
         return;
       }
       var popup = L.popup();

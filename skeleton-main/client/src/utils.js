@@ -1,8 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const file = fs.readFileSync(path.join(__dirname, 'buildings.json'), 'utf8');
-const buildingsJSON = JSON.parse(file);
-
 function haversineDistance(lat1, lon1, lat2, lon2) {
     const R = 6371;
 
@@ -26,7 +21,7 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
     return distance;
 }
 
-function getClosestBuilding(lat, lon, radius) {
+export function getClosestBuilding(lat, lon, radius, buildingsJSON) {
     let closestBuilding = null;
     let closestDistance = Infinity;
 
@@ -44,7 +39,3 @@ function getClosestBuilding(lat, lon, radius) {
 
     return closestBuilding ? closestBuilding : "None";
 }
-
-module.exports = {
-    getClosestBuilding
-};

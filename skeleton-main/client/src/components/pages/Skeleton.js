@@ -1,11 +1,10 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import fetch from "node-fetch";
+import { getClosestBuilding } from "../../utils";
 
 import "../../utilities.css";
 import "./Skeleton.css";
-
-const utils = require("../../utils");
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
@@ -16,6 +15,7 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
+
   map.on("click", function (event) {
     var lat = event.latlng.lat;
     var lng = event.latlng.lng;
@@ -28,25 +28,29 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
 
     console.log("Lat, Lon : " + lat + ", " + lng);
 
-    building = utils.getClosestBuilding(lat, lng, 1000);
-    if (building == "None") {
-      console.log("No building found");
-      return;
-    }
-
-    fetch("/api/addInteraction", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ lat, lng, building }),
-    })
+    fetch('/buildings.json')
       .then((response) => response.json())
       .then((data) => {
-        console.log("Interaction saved:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+        const building = getClosestBuilding(lat, lng, 0.1, data);
+        if (building == "None") {
+          console.log("No building found");
+          return;
+        }
+
+        fetch("/api/addInteraction", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ lat, lng, building }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Interaction saved:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       });
   });
 

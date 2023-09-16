@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import fetch from "node-fetch";
+// import ScriptTag from "react-script-tag";
 
 import "../../utilities.css";
 import "./Skeleton.css";
@@ -9,37 +10,22 @@ import "./Skeleton.css";
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
 
 const Skeleton = ({}) => {
-  var map = L.map("map").setView([42.360001, -71.092003], 15);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-
-  map.on("click", function (event) {
-    var lat = event.latlng.lat;
-    var lng = event.latlng.lng;
-
-    console.log("Lat, Lon : " + lat + ", " + lng);
-
-    fetch("/api/addInteraction", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // building is hardcoded to Stud for now
-      body: JSON.stringify({ lat, lng, building: "Stud" }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Interaction saved:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
-
   return (
-    <>Hi!!</>
+    <>
+      Hi!!
+      {/* <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+      />
+      <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+      ></script>
+      <div id="map"></div> */}
+    </>
     // <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     //   {userId ? (
     //     <button

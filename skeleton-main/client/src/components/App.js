@@ -46,6 +46,7 @@ const App = () => {
   return (
     <>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+
       <Routes>
         <Route path="/" element={<Skeleton />} />
         <Route path="*" element={<NotFound />} />

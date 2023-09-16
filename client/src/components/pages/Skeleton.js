@@ -10,7 +10,7 @@ const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.goo
 
 const Skeleton = ({}) => {
   return (
-    <>Hi!</>
+    <div className="Skeleton-Container">Hi!</div>
     // <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     //   {userId ? (
     //     <button

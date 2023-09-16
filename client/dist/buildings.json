@@ -1,81 +1,81 @@
 {
-    "1": {
+    "Building 1": {
         "latitude": 42.3580710183494,
         "longitude": -71.092540025711
     },
-    "3": {
+    "Building 3": {
         "latitude": 42.3588485293251,
         "longitude": -71.0923683643341
     },
-    "5": {
+    "Building 5": {
         "latitude": 42.3587691919112,
         "longitude": -71.0930013656616
     },
-    "4": {
+    "Building 4": {
         "latitude": 42.3592610822628,
         "longitude": -71.09090924263
     },
-    "2": {
+    "Building 2": {
         "latitude": 42.3588485293251,
         "longitude": -71.0900402069092
     },
-    "6": {
+    "Building 6": {
         "latitude": 42.3594832250304,
         "longitude": -71.0903942584991
     },
-    "8": {
+    "Building 8": {
         "latitude": 42.3599433754079,
         "longitude": -71.0908770561218
     },
-    "12": {
+    "Building 12": {
         "latitude": 42.3601575821928,
         "longitude": -71.0913920402527
     },
-    "13": {
+    "Building 13": {
         "latitude": 42.3599354418092,
         "longitude": -71.092529296875
     },
-    "9": {
+    "Building 9": {
         "latitude": 42.359721234267,
         "longitude": -71.0935056209564
     },
-    "7": {
+    "Building 7": {
         "latitude": 42.3592848833111,
         "longitude": -71.0931515693664
     },
-    "33": {
+    "Building 33": {
         "latitude": 42.3601179143247,
         "longitude": -71.0937631130218
     },
-    "17": {
+    "Building 17": {
         "latitude": 42.3601020471705,
         "longitude": -71.0935163497925
     },
-    "35": {
+    "Building 35": {
         "latitude": 42.3603559211573,
         "longitude": -71.0940635204315
     },
-    "37": {
+    "Building 37": {
         "latitude": 42.360617710304,
         "longitude": -71.093258857727
     },
-    "39": {
+    "Building 39": {
         "latitude": 42.3608317241837,
         "longitude": -71.0927438735962
     },
-    "38": {
+    "Building 38": {
         "latitude": 42.3610695723625,
         "longitude": -71.0923361778259
     },
-    "24": {
+    "Building 24": {
         "latitude": 42.3606490227026,
         "longitude": -71.0919606685638
     },
-    "34": {
+    "Building 34": {
         "latitude": 42.3611012310913,
         "longitude": -71.0918962955475
     },
-    "36": {
+    "Building 36": {
         "latitude": 42.3614025802486,
         "longitude": -71.0916817188263
     },
@@ -83,111 +83,111 @@
         "latitude": 42.3616403627318,
         "longitude": -71.09055519104
     },
-    "W57": {
+    "Building W57": {
         "latitude": 42.3611008152249,
         "longitude": -71.0901260375976
     },
-    "66": {
+    "Building 66": {
         "latitude": 42.3608945451341,
         "longitude": -71.0889995098114
     },
-    "68": {
+    "Building 68": {
         "latitude": 42.3616244208757,
         "longitude": -71.0885918140411
     },
-    "62 (EC)": {
+    "East Campus 1": {
         "latitude": 42.3601963085468,
         "longitude": -71.0886669158935
     },
-    "64 (EC)": {
+    "East Campus 2": {
         "latitude": 42.3603867138474,
         "longitude": -71.0881304740905
     },
-    "50 (Walker)": {
+    "Walker Memorial": {
         "latitude": 42.3593791459133,
         "longitude": -71.0882806777954
     },
-    "14 (Hayden)": {
+    "Hayden Library": {
         "latitude": 42.3591570027778,
         "longitude": -71.0892355442047
     },
-    "76": {
+    "Building 76": {
         "latitude": 42.3622315701036,
         "longitude": -71.0893321037292
     },
-    "E1": {
+    "Building E1": {
         "latitude": 42.3596101807303,
         "longitude": -71.086950302124
     },
-    "E2": {
+    "Building E2": {
         "latitude": 42.3600465294272,
         "longitude": -71.0868859291076
     },
-    "E14 (Media Lab)": {
+    "Media Lab": {
         "latitude": 42.3604114732831,
         "longitude": -71.0872828960418
     },
-    "E15": {
+    "Building E15": {
         "latitude": 42.3607764150194,
         "longitude": -71.0876584053039
     },
-    "E23 (Medical)": {
+    "MIT Medical": {
         "latitude": 42.3610620201172,
         "longitude": -71.0866177082061
     },
-    "E25": {
+    "Building E25": {
         "latitude": 42.3616173596465,
         "longitude": -71.0869717597961
     },
-    "E17": {
+    "Building E17": {
         "latitude": 42.3614348914854,
         "longitude": -71.0878837108612
     },
-    "E18": {
+    "Building E18": {
         "latitude": 42.3617046268405,
         "longitude": -71.0877656936645
     },
-    "E19": {
+    "Building E19": {
         "latitude": 42.3620854277234,
         "longitude": -71.0879588127136
     },
-    "E28": {
+    "Building E28": {
         "latitude": 42.3620933610506,
         "longitude": -71.0866820812225
     },
-    "E38": {
+    "Building E38": {
         "latitude": 42.3620219610699,
         "longitude": -71.085877418518
     },
-    "E37": {
+    "Building E37": {
         "latitude": 42.3618950275705,
         "longitude": -71.0854697227478
     },
-    "E40": {
+    "Building E40": {
         "latitude": 42.3611334211888,
         "longitude": -71.0848796367645
     },
-    "E51 (Wong Auditorium)": {
+    "Wong Auditorium": {
         "latitude": 42.3605146092061,
         "longitude": -71.0843539237976
     },
-    "E52": {
+    "Building E52": {
         "latitude": 42.3607208805441,
         "longitude": -71.0837209224701
     },
-    "E53 (Dewey Library)": {
+    "Dewey Library": {
         "latitude": 42.3612048221792,
         "longitude": -71.0835814476013
     },
-    "E62": {
+    "Building E62": {
         "latitude": 42.3612762230885,
         "longitude": -71.0826158523559
     },
-    "E60": {
+    "Building E60": {
         "latitude": 42.3611318674664,
         "longitude": -71.0821223258972
     },
-    "E70": {
+    "Building E70": {
         "latitude": 42.3627344035431,
         "longitude": -71.0835063457489
     },
@@ -195,83 +195,83 @@
         "latitude": 42.3630277192473,
         "longitude": -71.088752746582
     },
-    "48": {
+    "Building 48": {
         "latitude": 42.3624245787881,
         "longitude": -71.0906839370727
     },
-    "46 (BCS)": {
+    "Building 46 (BCS)": {
         "latitude": 42.362337312594,
         "longitude": -71.0915851593017
     },
-    "N4": {
+    "Building N4": {
         "latitude": 42.3619803132651,
         "longitude": -71.0928189754486
     },
-    "45": {
+    "Building 45": {
         "latitude": 42.3615915783556,
         "longitude": -71.0924220085144
     },
-    "41": {
+    "Building 41": {
         "latitude": 42.3607188993906,
         "longitude": -71.0942029953003
     },
-    "42": {
+    "Building 42": {
         "latitude": 42.3610124382135,
         "longitude": -71.0936558246612
     },
-    "42C": {
+    "Building 42C": {
         "latitude": 42.3615995117451,
         "longitude": -71.0935163497925
     },
-    "W31 (Dupont)": {
+    "Dupont 1": {
         "latitude": 42.3596161331817,
         "longitude": -71.0951793193817
     },
-    "W32 (Dupont)": {
+    "Dupont 2": {
         "latitude": 42.3593305215118,
         "longitude": -71.0950398445129
     },
-    "W33 (Rockwell)": {
+    "Rockwell Cage": {
         "latitude": 42.3591401130107,
         "longitude": -71.0960376262665
     },
-    "W34 (Johnson)": {
+    "Johnson Arena": {
         "latitude": 42.3585292151744,
         "longitude": -71.0965526103973
     },
-    "W35 (Zesiger)": {
+    "Z-Center": {
         "latitude": 42.3586720229927,
         "longitude": -71.095769405365
     },
-    "W20 (Stud)": {
+    "Stud": {
         "latitude": 42.3590449085437,
         "longitude": -71.0948038101196
     },
-    "W16 (Kresge)": {
+    "Kresge Auditorium": {
         "latitude": 42.3581325250873,
         "longitude": -71.095061302185
     },
-    "W15 (Chapel)": {
+    "Building W15 (Chapel)": {
         "latitude": 42.3582991352289,
         "longitude": -71.094160079956
     },
-    "W11": {
+    "Building W11": {
         "latitude": 42.3582356647508,
         "longitude": -71.0935378074646
     },
-    "W1 (Maseeh)": {
+    "Maseeh": {
         "latitude": 42.3576882292167,
         "longitude": -71.0934841632843
     },
-    "W4 (MC)": {
+    "McCormick": {
         "latitude": 42.3571407889135,
         "longitude": -71.0944390296936
     },
-    "W5 (Green Hall)": {
+    "Building W5 (Green Hall)": {
         "latitude": 42.3569107038844,
         "longitude": -71.0950934886932
     },
-    "W7 (Baker)": {
+    "Baker": {
         "latitude": 42.3566885520225,
         "longitude": -71.0958015918731
     },
@@ -279,11 +279,11 @@
         "latitude": 42.3563553227571,
         "longitude": -71.0964667797088
     },
-    "PBE": {
+    "Phi Beta Epsilon": {
         "latitude": 42.3561331689319,
         "longitude": -71.0972821712494
     },
-    "W51 (BC)": {
+    "Burton-Conner": {
         "latitude": 42.3559824212461,
         "longitude": -71.0981941223144
     },
@@ -291,19 +291,19 @@
         "latitude": 42.3556729906529,
         "longitude": -71.0987734794616
     },
-    "MacG": {
+    "MacGregor": {
         "latitude": 42.3554746369071,
         "longitude": -71.0995888710022
     },
-    "New": {
+    "New House": {
         "latitude": 42.3551810722145,
         "longitude": -71.1005330085754
     },
-    "Next": {
+    "Next House": {
         "latitude": 42.3547288212207,
         "longitude": -71.1018848419189
     },
-    "W84 (Tang)": {
+    "Tang Hall": {
         "latitude": 42.3543321071431,
         "longitude": -71.1034512519836
     },
@@ -339,27 +339,27 @@
         "latitude": 42.3568392980144,
         "longitude": -71.1004900932312
     },
-    "W79 (Simmons)": {
+    "Simmons Hall": {
         "latitude": 42.3571090530975,
         "longitude": -71.1014878749847
     },
-    "W59 (Heinz)": {
+    "Building W59 (Heinz)": {
         "latitude": 42.3580849221085,
         "longitude": -71.099556684494
     },
-    "W46 (New Vassar)": {
+    "New Vassar": {
         "latitude": 42.3588386317038,
         "longitude": -71.098119020462
     },
-    "W41 (Metropolitan Storage)": {
+    "Building W41 (Metropolitan Storage)": {
         "latitude": 42.3598144738553,
         "longitude": -71.0960376262665
     },
-    "Roberts": {
+    "Roberts Field": {
         "latitude": 42.3579103775447,
         "longitude": -71.097754240036
     },
-    "Barry": {
+    "Barry Field": {
         "latitude": 42.3574343444517,
         "longitude": -71.0967779159546
     },
@@ -375,7 +375,7 @@
         "latitude": 42.3568948359204,
         "longitude": -71.0977756977081
     },
-    "W8 (Boathouse)": {
+    "Building W8 (Boathouse)": {
         "latitude": 42.3552604141585,
         "longitude": -71.0968959331512
     },
@@ -403,7 +403,7 @@
         "latitude": 42.3506010553553,
         "longitude": -71.0910487174988
     },
-    "Delta Tau Delta": {
+    "DTD": {
         "latitude": 42.3523070093906,
         "longitude": -71.0849010944366
     },
@@ -411,16 +411,8 @@
         "latitude": 42.3512362214064,
         "longitude": -71.0821974277496
     },
-    "Tau Epsilon Phi": {
+    "TEP": {
         "latitude": 42.3508632895209,
         "longitude": -71.0834848880768
-    },
-    "Delta Kappa Epsilon": {
-        "latitude": 42.35618861733963,
-        "longitude": -71.09698965384
-    },
-    "Kappa Sigma": {
-        "latitude": 42.35611127638692,
-        "longitude": -71.09737328907931
     }
 }

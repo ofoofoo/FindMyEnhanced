@@ -1,26 +1,10 @@
-/*
-|--------------------------------------------------------------------------
-| api.js -- server routes
-|--------------------------------------------------------------------------
-|
-| This file defines the routes for your server.
-|
-*/
-
 const express = require("express");
+const auth = require("./auth");
+const router = express.Router();
+const socketManager = require("./server-socket");
 
-// import models so we can interact with the database
 const User = require("./models/user");
 const Interaction = require("./models/interaction");
-
-// import authentication library
-const auth = require("./auth");
-
-// api endpoints: all these paths will be prefixed with "/api/"
-const router = express.Router();
-
-//initialize socket
-const socketManager = require("./server-socket");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -44,7 +28,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.post("/addInteraction", (req, res) => {
+router.post("/add-interaction", (req, res) => {
   const userId = req.user?._id;
   // const userId = "6505f7a1ba168fcafd711316";
   const type = "click";
@@ -70,6 +54,20 @@ router.post("/addInteraction", (req, res) => {
     console.log("Successfully saved interaction:", savedInteraction);
     return res.status(200).send(savedInteraction);
   })
+});
+
+router.get("/fetch-interactions", async (req, res) => {
+  const userId = req.user?._id;
+  if (!userId) {
+    return res.status(401).send({ msg: "User not logged in!" });
+  }
+  try {
+    const interactions = await Interaction.find({ user: userId }, 'lat lng building -_id');
+    res.status(200).json(interactions);
+  } catch (err) {
+    console.error("Failed to get interactions:", err);
+    res.status(500).send({ msg: "Error fetching interactions:", err });
+  }
 });
 
 // anything else falls to this "not found" case

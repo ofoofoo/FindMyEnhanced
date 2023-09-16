@@ -403,16 +403,24 @@
         "latitude": 42.3506010553553,
         "longitude": -71.0910487174988
     },
-    "DTD": {
+    "Delta Tau Delta": {
         "latitude": 42.3523070093906,
         "longitude": -71.0849010944366
     },
-    "PKT": {
+    "Phi Kappa Theta": {
         "latitude": 42.3512362214064,
         "longitude": -71.0821974277496
     },
-    "TEP": {
+    "Tau Epsilon Phi": {
         "latitude": 42.3508632895209,
         "longitude": -71.0834848880768
+    },
+    "Delta Kappa Epsilon": {
+        "latitude": 42.35618861733963,
+        "longitude": -71.09698965384
+    },
+    "Kappa Sigma": {
+        "latitude": 42.35611127638692,
+        "longitude": -71.09737328907931
     }
 }

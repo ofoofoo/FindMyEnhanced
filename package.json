@@ -28,6 +28,7 @@
     "google-auth-library": "^8.7.0",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
+    "leaflet.heat": "^0.2.0",
     "mongodb": "^6.1.0",
     "mongoose": "^6.12.0",
     "nodemon": "^2.0.6",

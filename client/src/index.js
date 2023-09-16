@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { getClosestBuilding } from "./utils";
+import "leaflet.heat";
 
 import App from "./components/App.js";
 
@@ -44,7 +45,7 @@ map.on("click", function (event) {
 
       console.log("Lat:", lat, "Lng:", lng, "Building:", building);
 
-      fetch("/api/addInteraction", {
+      fetch("/api/add-interaction", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,3 +61,27 @@ map.on("click", function (event) {
         });
     });
 });
+
+function getHeatMap() {
+  fetch("/api/fetch-interactions")
+    .then((response) => response.json())
+    .then((data) => {
+      createHeatMap(data);
+    })
+    .catch((err) => {
+      console.error("Error fetching interactions:", err);
+    });
+}
+
+function createHeatMap(interactions) {
+  const heatData = interactions.map((interaction) => {
+    return [interaction.lat, interaction.lng];
+  });
+
+  const heat = L.heatLayer(heatData, {
+    radius: 25,
+    blur: 15,
+  }).addTo(map);
+}
+
+window.getHeatMap = getHeatMap;

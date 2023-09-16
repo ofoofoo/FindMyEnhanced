@@ -38,7 +38,7 @@ const socketManager = require("./server-socket");
 // TODO change connection URL after setting up your team database
 mongo_username = process.env.MONGO_USERNAME;
 mongo_password = process.env.MONGO_PASSWORD;
-const mongoConnectionURL = `mongodb+srv://${mongo_username}:${mongo_password}@mit-heat-map.c22xzit.mongodb.net/?retryWrites=true&w=majority`;
+const mongoConnectionURL = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.ihatq2y.mongodb.net/?retryWrites=true&w=majority`;
 // TODO change database name to the name you chose
 const databaseName = "MIT-heat-map";
 

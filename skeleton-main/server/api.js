@@ -46,7 +46,7 @@ router.post("/initsocket", (req, res) => {
 
 router.post("/addInteraction", (req, res) => {
   // const userId = req.user?._id;
-  const userId = "6505f3a56b8f45d5500c9770";
+  const userId = "6505f7a1ba168fcafd711316";
   const type = "click";
   const { lat, lng, building } = req.body;
 

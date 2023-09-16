@@ -45,8 +45,8 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 
 router.post("/addInteraction", (req, res) => {
-  // const userId = req.user?._id;
-  const userId = "6505f7a1ba168fcafd711316";
+  const userId = req.user?._id;
+  // const userId = "6505f7a1ba168fcafd711316";
   const type = "click";
   const { lat, lng, building } = req.body;
 
@@ -69,7 +69,7 @@ router.post("/addInteraction", (req, res) => {
     }
     console.log("Successfully saved interaction:", savedInteraction);
     return res.status(200).send(savedInteraction);
-  })
+  });
 });
 
 // anything else falls to this "not found" case

@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
+import fetch from "node-fetch";
 
 import "../../utilities.css";
 import "./Skeleton.css";
@@ -13,6 +14,29 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
+
+  map.on('click', function (event) {
+    var lat = event.latlng.lat;
+    var lng = event.latlng.lng;
+
+    console.log("Lat, Lon : " + lat + ", " + lng)
+
+    fetch('/api/addInteraction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // building is hardcoded to Stud for now
+      body: JSON.stringify({ lat, lng, building: "Stud" }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Interaction saved:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

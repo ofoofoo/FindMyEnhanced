@@ -36,13 +36,17 @@ const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = process.env.MONGO_SRV;
+mongo_username = process.env.MONGO_USERNAME;
+mongo_password = process.env.MONGO_PASSWORD;
+const mongoConnectionURL = `mongodb+srv://${mongo_username}:${mongo_password}@mit-heat-map.c22xzit.mongodb.net/?retryWrites=true&w=majority`;
 // TODO change database name to the name you chose
-const databaseName = "FILL_ME_IN";
+const databaseName = "MIT-heat-map";
 
 // mongoose 7 warning
 mongoose.set("strictQuery", false);
 
+// delete later
+const User = require("./models/user");
 // connect to mongodb
 mongoose
   .connect(mongoConnectionURL, {
@@ -50,6 +54,14 @@ mongoose
     useUnifiedTopology: true,
     dbName: databaseName,
   })
+  // .then(() => {
+  //   const dummyUser = new User({
+  //     name: "Nathan Xiong",
+  //     googleid: "0"
+  //   })
+
+  //   return dummyUser.save();
+  // })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 

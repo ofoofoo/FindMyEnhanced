@@ -22,9 +22,23 @@ const Skeleton = ({ userName }) => {
   return (
     <div className="Skeleton-Container">
       <div className="Hi-text">
-      <span><span>Hi there{userName ? <span>, <span className="gradient-text"> <span>{userName}</span></span></span> : ""}</span>!</span>
-
-
+        <span>
+          <span>
+            Hi there
+            {userName ? (
+              <span>
+                ,{" "}
+                <span className="gradient-text">
+                  {" "}
+                  <span>{userName}</span>
+                </span>
+              </span>
+            ) : (
+              ""
+            )}
+          </span>
+          !
+        </span>
       </div>
       <div className="Info-text">
         {userName
@@ -46,7 +60,7 @@ const Skeleton = ({ userName }) => {
           <button
             className="button-53"
             onClick={() => {
-              displayUserInteractionstimestamp();
+              getAllHeatMap();
               showallHeaters(1);
               clearHeatmap();
               showHeaters(0);

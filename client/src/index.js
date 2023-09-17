@@ -85,31 +85,45 @@ function getUserHeatMap() {
     });
 }
 
-//const map = L.map('map').setView([0, 0], 2); // Set your initial map view
+//const map = L.map('map').setView([0, 0], 2); 
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
 const heatmapGroup = L.layerGroup().addTo(map);
 
 export async function displayUserInteractionstimestamp() {
   try {
-    const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
+    const response = await fetch("/api/fetch-interactions-timestamp"); 
     const interactions = await response.json();
     interactions.sort((a, b) => a.timestamp - b.timestamp);
 
+    // Initialize markerNumber and initialOpacity
+    let markerNumber = 1;
     let initialOpacity = 1.0;
 
-    const opacityReductionRate = 0.008; // Adjust this value as needed
+    // Define the opacity reduction rate to reach 0.1
+    const opacityReductionRate = (1.0 - 0.1) / interactions.length;
 
-    interactions.forEach((interaction, index) => {
+    interactions.forEach((interaction) => {
       const { lat, lng } = interaction;
 
-      const marker = L.marker([lat, lng]).addTo(markerGroup);
+      // Create a marker with a numbered DivIcon
+      const marker = L.marker([lat, lng], {
+        icon: L.divIcon({
+          className: 'numbered-marker', // Define a CSS class for styling
+          html: `<span style="font-weight: bold; margin-left: -5px; margin-top: 5px;">${markerNumber}</span>`, // Adjust margin-left to move the numbers to the left
+        
+        }),
+      }).addTo(markerGroup);
+
+      // Create an array to store coordinates for drawing lines
       const lineCoordinates = [];
       lineCoordinates.push([lat, lng]);
-      const opacity = initialOpacity - index * opacityReductionRate;
 
-      if (index > 0) {
-        const previousInteraction = interactions[index - 1];
+      // Calculate the opacity based on initialOpacity
+      const opacity = initialOpacity;
+
+      if (markerNumber > 1) {
+        const previousInteraction = interactions[markerNumber - 2];
         const polyline = L.polyline(
           [
             [previousInteraction.lat, previousInteraction.lng],
@@ -119,12 +133,17 @@ export async function displayUserInteractionstimestamp() {
         ).addTo(markerGroup);
       }
 
-      initialOpacity = opacity;
+      // Increment the marker number
+      markerNumber++;
+
+      // Decrease initialOpacity for the next interaction
+      initialOpacity -= opacityReductionRate;
     });
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
 }
+
 
 
 export function clearMarkers() {
@@ -133,9 +152,11 @@ export function clearMarkers() {
 
 async function displayUserInteractions() {
   try {
-    const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
+    const response = await fetch("/api/fetch-interactions-timestamp"); 
     const interactions = await response.json();
     const lineCoordinates = [];
+    const dotIcon = L.divIcon({ className: 'dot-icon' }); 
+
 
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;

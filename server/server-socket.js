@@ -1,7 +1,7 @@
 let io;
 
-const userToSocketMap = {}; 
-const socketToUserMap = {}; 
+const userToSocketMap = {};
+const socketToUserMap = {};
 
 const getSocketFromUserID = (userid) => userToSocketMap[userid];
 const getUserFromSocketID = (socketid) => socketToUserMap[socketid];

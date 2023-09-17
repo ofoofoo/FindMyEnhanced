@@ -102,7 +102,7 @@ async function displayUserInteractionstimestamp() {
       // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
     });
   } catch (error) {
-    console.error("Failed to fetch interactions:", error);
+    console.error("Failed to fetch interactions: ", error);
   }
 }
 

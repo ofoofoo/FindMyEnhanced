@@ -62,7 +62,7 @@ map.on("click", function (event) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Interaction saved:", data);
-          getPath();
+          // getPath();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -90,7 +90,7 @@ function getUserHeatMap() {
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Function to fetch and display user interactions on the map
-async function displayUserInteractionstimestamp() {
+export async function displayUserInteractionstimestamp() {
   try {
     // Fetch user interactions using your API endpoint
     const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
@@ -199,3 +199,4 @@ function createHeatMap(heatMapData) {
 }
 
 window.getPath = displayUserInteractionstimestamp;
+window.getUserHeatMap = getUserHeatMap;

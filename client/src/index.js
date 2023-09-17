@@ -95,9 +95,10 @@ async function displayUserInteractionstimestamp() {
     // Fetch user interactions using your API endpoint
     const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
     const interactions = await response.json();
+    interactions.sort((a, b) => a.timestamp - b.timestamp);
 
     // Iterate through interactions and add markers to the map
-    interactions.forEach((interaction) => {
+    interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
       // Create a marker with a popup (you can customize the popup content)
@@ -105,7 +106,30 @@ async function displayUserInteractionstimestamp() {
 
       // You can add a popup with custom content if needed
       // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
+
+      
+      const lineCoordinates = [];
+      // Add the coordinates to the lineCoordinates array
+      // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
+      lineCoordinates.push([lat, lng]);
+      // Connect consecutive markers with lines (starting from the second marker)
+      console.log(interactions);
+      if (index > 0) {
+        const previousInteraction = interactions[index - 1];
+        const polyline = L.polyline(
+          [
+            [previousInteraction.lat, previousInteraction.lng],
+            [lat, lng],
+          ],
+          { color: "blue", opacity: 0.5 } // Customize the line color
+        ).addTo(map);
+      }
+
+
     });
+
+
+
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
@@ -132,6 +156,7 @@ async function displayUserInteractions() {
       lineCoordinates.push([lat, lng]);
 
       // Connect consecutive markers with lines (starting from the second marker)
+      console.log(interactions);
       if (index > 0) {
         const previousInteraction = interactions[index - 1];
         const polyline = L.polyline(

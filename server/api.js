@@ -28,6 +28,28 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+router.get("/fetch-interactions-timestamp", async (req, res) => {
+  const userId = req.user?._id;
+  if (!userId) {
+    return res.status(401).send({ msg: "User not logged in!" });
+  }
+
+  // Calculate the timestamp for 8:00 AM today
+  const today = new Date();
+  today.setHours(18, 0, 0, 0);
+
+  try {
+    const interactions = await Interaction.find(
+      { user: userId, timestamp: { $gte: today } },
+      "lat lng building -_id"
+    );
+    res.status(200).json(interactions);
+  } catch (err) {
+    console.error("Failed to get interactions:", err);
+    res.status(500).send({ msg: "Error fetching interactions:", err });
+  }
+});
+
 router.post("/add-interaction", (req, res) => {
   const userId = req.user?._id;
   // const userId = "6505f7a1ba168fcafd711316";
@@ -53,7 +75,7 @@ router.post("/add-interaction", (req, res) => {
     }
     console.log("Successfully saved interaction:", savedInteraction);
     return res.status(200).send(savedInteraction);
-  })
+  });
 });
 
 router.get("/fetch-interactions", async (req, res) => {
@@ -62,7 +84,7 @@ router.get("/fetch-interactions", async (req, res) => {
     return res.status(401).send({ msg: "User not logged in!" });
   }
   try {
-    const interactions = await Interaction.find({ user: userId }, 'lat lng building -_id');
+    const interactions = await Interaction.find({ user: userId }, "lat lng building -_id");
     res.status(200).json(interactions);
   } catch (err) {
     console.error("Failed to get interactions:", err);

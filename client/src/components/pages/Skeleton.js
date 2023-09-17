@@ -11,6 +11,7 @@ const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.goo
 
 const Skeleton = ({ userName }) => {
   const [markShow, showMarkers] = useState(0);
+  const [heatShow, showHeaters] = useState(0);
 
   return (
     <div className="Skeleton-Container">
@@ -23,9 +24,27 @@ const Skeleton = ({ userName }) => {
       <div className="Button-holder">
         {userName ? (
           <>
-            <button className="button-53" onClick={() => getUserHeatMap()}>
-              Generate Heat Map
-            </button>
+            {markShow ? (
+              <button
+                className="button-53"
+                onClick={() => {
+                  clearHeatmap();
+                  showMarkers(0);
+                }}
+              >
+                Hide Heat Map
+              </button>
+            ) : (
+              <button
+                className="button-53"
+                onClick={() => {
+                  getUserHeatMap();
+                  showMarkers(1);
+                }}
+              >
+                Generate Heat Map
+              </button>
+            )}
             {markShow ? (
               <button
                 className="button-53"

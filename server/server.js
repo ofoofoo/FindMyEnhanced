@@ -1,48 +1,25 @@
-/*
-|--------------------------------------------------------------------------
-| server.js -- The core of your server
-|--------------------------------------------------------------------------
-|
-| This file defines how your server starts up. Think of it as the main() of your server.
-| At a high level, this file does the following things:
-| - Connect to the database
-| - Sets up server middleware (i.e. addons that enable things like json parsing, user login)
-| - Hooks up all the backend routes specified in api.js
-| - Fowards frontend routes that should be handled by the React router
-| - Sets up error handling in case something goes wrong when handling a request
-| - Actually starts the webserver
-*/
-
-// validator runs some basic checks to make sure you've set everything up correctly
-// this is a tool provided by staff, so you don't need to worry about it
 const validator = require("./validator");
 validator.checkSetup();
 
-//allow us to use process.ENV
 require("dotenv").config();
 
-//import libraries needed for the webserver to work!
 const http = require("http");
-const express = require("express"); // backend framework for our node server.
-const session = require("express-session"); // library that stores info about each connected user
-const mongoose = require("mongoose"); // library to connect to MongoDB
-const path = require("path"); // provide utilities for working with file and directory paths
+const express = require("express"); 
+const session = require("express-session"); 
+const mongoose = require("mongoose");
+const path = require("path"); 
 
 const api = require("./api");
 const auth = require("./auth");
 
-// socket stuff
 const socketManager = require("./server-socket");
 
-// Server configuration below
-// TODO change connection URL after setting up your team database
+
 mongo_username = process.env.MONGO_USERNAME;
 mongo_password = process.env.MONGO_PASSWORD;
 const mongoConnectionURL = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.ihatq2y.mongodb.net/?retryWrites=true&w=majority`;
-// TODO change database name to the name you chose
 const databaseName = "MIT-heat-map";
 
-// mongoose 7 warning
 mongoose.set("strictQuery", false);
 
 // delete later

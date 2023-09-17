@@ -4,7 +4,12 @@ import "../../index.js";
 import "../../utilities.css";
 import "./Skeleton.css";
 
-import { displayUserInteractionstimestamp, clearMarkers, clearHeatmap } from "../../index.js";
+import {
+  displayUserInteractionstimestamp,
+  clearMarkers,
+  clearHeatmap,
+  clearallHeatmap,
+} from "../../index.js";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
@@ -29,7 +34,7 @@ const Skeleton = ({ userName }) => {
           <button
             className="button-53"
             onClick={() => {
-              clearHeatmap();
+              clearallHeatmap();
               showallHeaters(0);
             }}
           >
@@ -41,6 +46,8 @@ const Skeleton = ({ userName }) => {
             onClick={() => {
               getAllHeatMap();
               showallHeaters(1);
+              clearHeatmap();
+              showHeaters(0);
             }}
           >
             Show Combined Heat Map
@@ -64,6 +71,8 @@ const Skeleton = ({ userName }) => {
                 onClick={() => {
                   getUserHeatMap();
                   showHeaters(1);
+                  clearallHeatmap();
+                  showallHeaters(0);
                 }}
               >
                 Show my Heat Map

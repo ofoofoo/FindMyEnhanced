@@ -174,3 +174,4 @@ function createHeatMap(heatMapData) {
 }
 
 window.getPath = displayUserInteractionstimestamp;
+window.getUserHeatMap = getUserHeatMap;

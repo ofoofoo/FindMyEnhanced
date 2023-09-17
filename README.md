@@ -8,7 +8,7 @@ Made by Abhay Bestrapalli, Orion Foo, Nathan Xiong, and Ram Goel.
 
 ## How it works
 
-As you walk around MIT's campus, login to [MIT Heat Map](INSERT_URL_HERE) and click on your location on the map. Whenever you go to another building, click the new location on the map. We track the time spent at each location and use it to display a heat map of where you spend most of your time on campus. We also display the path of where you've visited throughout the day.
+As you walk around MIT's campus, login to [MIT Heat Map](https://mit-heatmap-f60b83158200.herokuapp.com/) and click on your location on the map. Whenever you go to another building, click the new location on the map. We track the time spent at each location and use it to display a heat map of where you spend most of your time on campus. We also display the path of where you've visited throughout the day.
 
 ## Features
 
@@ -20,10 +20,13 @@ Our website has three main features for visualizing location data:
 
 We enable secure login with Google authentication.
 
+Our heat map is based on the amount of time spent in a building. The more time between your location clicks, the more we increase your heat at the location. Your location is determined to be the MIT building your reported location is closest to. 
+
 ## What we used
 
 We used the following technologies:
-
-- [Leaflet.js](https://leafletjs.com/) for providing map data, and for adding features to the map.
-- [Express.js](https://expressjs.com/) for backend work.
-- [MongoDB](https://www.mongodb.com/) for database work.
+* [Leaflet.js](https://leafletjs.com/) for providing map data, and for adding features to the map. 
+* [Express.js](https://expressjs.com/) for backend work. 
+* [MongoDB](https://www.mongodb.com/)  
+* [React](https://react.dev/) 
+* [MIT Building Data](https://whereis.mit.edu/)

@@ -26,7 +26,8 @@ Our heat map is based on the amount of time spent in a building. The more time b
 
 We used the following technologies:
 * [Leaflet.js](https://leafletjs.com/) for providing map data, and for adding features to the map. 
-* [Express.js](https://expressjs.com/) for backend work. 
-* [MongoDB](https://www.mongodb.com/)  
-* [React](https://react.dev/) 
+* [Express.js](https://expressjs.com/) and [Node.js](https://nodejs.org/en) 
+* [MongoDB](https://www.mongodb.com/)  and [Mongoose](https://mongoosejs.com/docs/)
+* [React](https://react.dev/)
+* [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
 * [MIT Building Data](https://whereis.mit.edu/)

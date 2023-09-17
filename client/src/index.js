@@ -1,7 +1,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { getClosestBuilding, calculateTimeSpent, calculateHeatData, createCompleteHeatMap } from "./utils";
+import {
+  getClosestBuilding,
+  calculateTimeSpent,
+  calculateHeatData,
+  createCompleteHeatMap,
+} from "./utils";
 import "leaflet.heat";
 import App from "./components/App.js";
 
@@ -40,19 +45,16 @@ map.on("click", function (event) {
       }
 
       // undo button shit
-      const popupContent = document.createElement('div');
+      const popupContent = document.createElement("div");
       popupContent.innerHTML = `You've logged a visit at ${building} `;
-      const undoButton = document.createElement('button');
-      undoButton.innerHTML = 'Undo';
-      undoButton.id = 'undoBtn';
-      undoButton.addEventListener('click', undoLastInteraction);
+      const undoButton = document.createElement("button");
+      undoButton.innerHTML = "Undo";
+      undoButton.id = "undoBtn";
+      undoButton.addEventListener("click", undoLastInteraction);
       popupContent.appendChild(undoButton);
 
       var popup = L.popup();
-      popup
-        .setLatLng(event.latlng)
-        .setContent(popupContent)
-        .openOn(map);
+      popup.setLatLng(event.latlng).setContent(popupContent).openOn(map);
 
       console.log("Lat:", lat, "Lng:", lng, "Building:", building);
 
@@ -84,7 +86,7 @@ function undoLastInteraction() {
   }
 
   fetch(`/api/remove-interaction/${lastInteractionId}`, {
-    method: 'DELETE',
+    method: "DELETE",
   })
     .then((response) => response.json())
     .then((data) => {
@@ -95,7 +97,6 @@ function undoLastInteraction() {
       console.error("Error:", error);
     });
 }
-
 
 function getUserHeatMap() {
   fetch("/api/fetch-user-interactions")
@@ -124,16 +125,17 @@ function getAllHeatMap() {
             .then((response) => response.json())
             .then((buildings) => {
               const heatMapData = createCompleteHeatMap(interactions, users, buildings);
-              createHeatMap(heatMapData);
+              createallHeatMap(heatMapData);
             });
-        })
+        });
     });
 }
 
-//const map = L.map('map').setView([0, 0], 2); 
+//const map = L.map('map').setView([0, 0], 2);
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
 const heatmapGroup = L.layerGroup().addTo(map);
+const heatallmapGroup = L.layerGroup().addTo(map);
 
 export async function displayUserInteractionstimestamp() {
   try {
@@ -154,9 +156,8 @@ export async function displayUserInteractionstimestamp() {
       // Create a marker with a numbered DivIcon
       const marker = L.marker([lat, lng], {
         icon: L.divIcon({
-          className: 'numbered-marker', // Define a CSS class for styling
+          className: "numbered-marker", // Define a CSS class for styling
           html: `<span style="font-weight: bold; margin-left: -5px; margin-top: 5px;">${markerNumber}</span>`, // Adjust margin-left to move the numbers to the left
-
         }),
       }).addTo(markerGroup);
 
@@ -178,7 +179,7 @@ export async function displayUserInteractionstimestamp() {
         ).addTo(markerGroup);
       }
 
-      marker._icon.querySelector('span').style.color = 'red';
+      marker._icon.querySelector("span").style.color = "red";
       markerNumber++;
 
       // Decrease initialOpacity for the next interaction
@@ -189,8 +190,6 @@ export async function displayUserInteractionstimestamp() {
   }
 }
 
-
-
 export function clearMarkers() {
   markerGroup.clearLayers();
 }
@@ -200,18 +199,18 @@ async function displayUserInteractions() {
     const response = await fetch("/api/fetch-interactions-timestamp");
     const interactions = await response.json();
     const lineCoordinates = [];
-    const dotIcon = L.divIcon({ className: 'dot-icon' });
+    const dotIcon = L.divIcon({ className: "dot-icon" });
 
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
-      let markerText = ''; // Initialize marker text
+      let markerText = ""; // Initialize marker text
 
       // Determine if this is the first or last interaction
       if (index === 0) {
-        markerText = 'Start';
+        markerText = "Start";
       } else if (index === interactions.length - 1) {
-        markerText = 'End';
+        markerText = "End";
       } else {
         markerText = (index + 1).toString(); // Use (index + 1) for intermediate interactions
       }
@@ -219,7 +218,7 @@ async function displayUserInteractions() {
       // Create a marker with the markerText as HTML content
       const marker = L.marker([lat, lng], {
         icon: L.divIcon({
-          className: 'numbered-marker', // Apply the custom CSS class
+          className: "numbered-marker", // Apply the custom CSS class
           html: `<span style="font-weight: bold;">${markerText}</span>`, // Bold the marker text directly in HTML
         }),
       }).addTo(map);
@@ -246,8 +245,6 @@ async function displayUserInteractions() {
   }
 }
 
-
-
 function createHeatMap(heatMapData) {
   L.heatLayer(heatMapData, {
     radius: 30,
@@ -257,8 +254,21 @@ function createHeatMap(heatMapData) {
   }).addTo(heatmapGroup);
 }
 
+function createallHeatMap(heatMapData) {
+  L.heatLayer(heatMapData, {
+    radius: 30,
+    blur: 40,
+    maxZoom: 15,
+    useLocalExtrema: true,
+  }).addTo(heatallmapGroup);
+}
+
 export function clearHeatmap() {
   heatmapGroup.clearLayers();
+}
+
+export function clearallHeatmap() {
+  heatallmapGroup.clearLayers();
 }
 
 window.getUserHeatMap = getUserHeatMap;

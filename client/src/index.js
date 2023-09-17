@@ -194,8 +194,10 @@ async function displayUserInteractions() {
 
 function createHeatMap(heatMapData) {
   L.heatLayer(heatMapData, {
-    radius: 25,
-    blur: 15,
+    radius: 30,
+    blur: 40,
+    maxZoom: 15,
+    useLocalExtrema: true,
   }).addTo(heatmapGroup);
 }
 

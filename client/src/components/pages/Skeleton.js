@@ -39,12 +39,27 @@ const Skeleton = ({ userName }) => {
           </span>
           !
         </span>
+        
       </div>
+      
       <div className="Info-text">
         {userName
           ? "Click on the map to log your current location!"
           : "Log in to log your location."}
       </div>
+      <div className="Explanation">
+  <div className="centered-content">
+  <span className="mulish-font">
+  As you walk around MIT's campus, login to <span style={{ color: 'red' }}>MIT Heat Map</span> and click on your location on the map.
+  Whenever you go to another building, <span style={{ color: 'red' }}>click the new location</span> on the map.
+  We track the time spent at each location and use it to display a heat map of where you spend most of your time on campus.
+  We also display the path of where you've visited throughout the day.
+</span>
+
+  </div>
+</div>
+
+
       <div className="Button-holder">
         {heatallShow ? (
           <button

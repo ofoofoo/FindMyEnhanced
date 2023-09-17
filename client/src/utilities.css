@@ -118,3 +118,19 @@ form {
   margin-right: 48px;
   font-family: "Mulish";
 }
+
+.Explanation {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  /* Additional styling for .Explanation if needed */
+  margin-left: 150px; 
+  margin-right: 150px; 
+  margin-top: 20px;
+}
+
+.mulish-font {
+  font-family: 'Mulish', sans-serif; /* Specify the Mulish font family */
+  /* Additional styling for the Mulish font if needed */
+}
+

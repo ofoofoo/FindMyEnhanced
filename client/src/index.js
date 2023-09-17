@@ -29,7 +29,7 @@ map.on("click", function (event) {
   fetch("/buildings.json")
     .then((response) => response.json())
     .then((data) => {
-      const building = getClosestBuilding(lat, lng, 10, data);
+      const building = getClosestBuilding(lat, lng, 1, data);
       if (building === "None") {
         console.log("No building found");
         var popup1 = L.popup();

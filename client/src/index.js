@@ -103,6 +103,12 @@ export async function displayUserInteractionstimestamp() {
     const interactions = await response.json();
     interactions.sort((a, b) => a.timestamp - b.timestamp);
 
+    // Define the initial opacity
+    let initialOpacity = 1.0;
+
+    // Define a rate of opacity reduction
+    const opacityReductionRate = 0.008; // Adjust this value as needed
+
     // Iterate through interactions and add markers to the map
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
@@ -110,15 +116,16 @@ export async function displayUserInteractionstimestamp() {
       // Create a marker with a popup (you can customize the popup content)
       const marker = L.marker([lat, lng]).addTo(markerGroup);
 
-      // You can add a popup with custom content if needed
-      // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
-
+      // Create an array to store coordinates for drawing lines
       const lineCoordinates = [];
+
       // Add the coordinates to the lineCoordinates array
-      // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
       lineCoordinates.push([lat, lng]);
+
+      // Calculate the opacity based on the timestamp
+      const opacity = initialOpacity - index * opacityReductionRate;
+
       // Connect consecutive markers with lines (starting from the second marker)
-      console.log(interactions);
       if (index > 0) {
         const previousInteraction = interactions[index - 1];
         const polyline = L.polyline(
@@ -126,14 +133,18 @@ export async function displayUserInteractionstimestamp() {
             [previousInteraction.lat, previousInteraction.lng],
             [lat, lng],
           ],
-          { color: "blue", opacity: 0.5 } // Customize the line color
+          { color: "blue", opacity: opacity } // Set the calculated opacity
         ).addTo(markerGroup);
       }
+
+      // Update the initial opacity for the next interaction
+      initialOpacity = opacity;
     });
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
 }
+
 
 export function clearMarkers() {
   markerGroup.clearLayers();

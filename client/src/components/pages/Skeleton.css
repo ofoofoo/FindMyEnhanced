@@ -17,7 +17,7 @@
   font-size: 24px;
 }
 .button-53 {
-  font-size: 24px;
+  font-size: 16px;
   letter-spacing: 4px;
   text-decoration: none;
   text-transform: uppercase;
@@ -32,6 +32,7 @@
   touch-action: manipulation;
   text-align: center;
   margin-top: 24px;
+  margin: 16px;
 }
 .button-53:active {
   box-shadow: 0px 0px 0px 0px;

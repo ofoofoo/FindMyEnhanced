@@ -6,6 +6,8 @@ import "../../index.js";
 import "../../utilities.css";
 import "./Skeleton.css";
 
+import { displayUserInteractionstimestamp } from "../../index.js";
+
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
 
@@ -20,9 +22,14 @@ const Skeleton = ({ userName }) => {
       </div>
       <div className="Button-holder">
         {userName ? (
-          <button className="button-53" onClick={() => getUserHeatMap()}>
-            Generate Heat Map
-          </button>
+          <>
+            <button className="button-53" onClick={() => getUserHeatMap()}>
+              Generate Heat Map
+            </button>
+            <button className="button-53" onClick={displayUserInteractionstimestamp}>
+              Show my Markers
+            </button>
+          </>
         ) : (
           <></>
         )}

@@ -34,13 +34,16 @@ router.get("/fetch-interactions-timestamp", async (req, res) => {
     return res.status(401).send({ msg: "User not logged in!" });
   }
 
-  // Calculate the timestamp for 8:00 AM today
+  // Calculate the timestamp for 10:00 PM today
   const today = new Date();
-  today.setHours(18, 0, 0, 0);
+  today.setHours(22, 0, 0, 0);
 
+  // Calculate the timestamp for 10:00 PM of the next day
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
   try {
     const interactions = await Interaction.find(
-      { user: userId, timestamp: { $gte: today } },
+      { user: userId, timestamp: { $gte: today, $lt: tomorrow } },
       "lat lng building -_id"
     );
     res.status(200).json(interactions);
@@ -84,7 +87,10 @@ router.get("/fetch-user-interactions", async (req, res) => {
     return res.status(401).send({ msg: "User not logged in!" });
   }
   try {
-    const interactions = await Interaction.find({ user: userId }, 'lat lng building timestamp -_id');
+    const interactions = await Interaction.find(
+      { user: userId },
+      "lat lng building timestamp -_id"
+    );
     res.status(200).json(interactions);
   } catch (err) {
     console.error("Failed to get interactions:", err);

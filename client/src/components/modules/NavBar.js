@@ -1,6 +1,12 @@
 import React from "react";
 // import { Link } from "@reach/router";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
+import {
+  displayUserInteractionstimestamp,
+  clearMarkers,
+  clearHeatmap,
+  clearallHeatmap,
+} from "../../index.js";
 
 import "./NavBar.css";
 
@@ -24,6 +30,8 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 onClick={() => {
                   googleLogout();
                   handleLogout();
+                  clearMarkers();
+                  clearHeatmap();
                 }}
               >
                 Logout

@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { getClosestBuilding } from "./utils";
+import { getClosestBuilding, calculateTimeSpent, calculateHeatData } from "./utils";
 import "leaflet.heat";
 
 import App from "./components/App.js";
@@ -42,12 +42,12 @@ map.on("click", function (event) {
         .setLatLng(event.latlng)
         .setContent(
           "You've logged a visit at " +
-            building +
-            " (" +
-            lat.toFixed(7) +
-            ", " +
-            lng.toFixed(7) +
-            ")"
+          building +
+          " (" +
+          lat.toFixed(7) +
+          ", " +
+          lng.toFixed(7) +
+          ")"
         )
         .openOn(map);
 
@@ -70,26 +70,36 @@ map.on("click", function (event) {
     });
 });
 
-function getHeatMap() {
-  fetch("/api/fetch-interactions")
+function getUserHeatMap() {
+  fetch("/api/fetch-user-interactions")
     .then((response) => response.json())
-    .then((data) => {
-      createHeatMap(data);
+    .then((interactions) => {
+      fetch("/buildings.json")
+        .then((response) => response.json())
+        .then((buildings) => {
+          const heatMapData = calculateHeatData(interactions, buildings);
+          createHeatMap(heatMapData);
+        });
     })
     .catch((err) => {
       console.error("Error fetching interactions:", err);
     });
 }
 
-function createHeatMap(interactions) {
-  const heatData = interactions.map((interaction) => {
-    return [interaction.lat, interaction.lng];
-  });
+// function getAllHeatMap() {
+//   fetch("/api/fetch-all-interactions")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       createHeatMap(data);
+//     })
+//     .catch((err) => {
+//       console.error("Error fetching interactions:", err);
+//     })
+// }
 
-  const heat = L.heatLayer(heatData, {
+function createHeatMap(heatMapData) {
+  L.heatLayer(heatMapData, {
     radius: 25,
     blur: 15,
   }).addTo(map);
 }
-
-window.getHeatMap = getHeatMap;

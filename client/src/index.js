@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { getClosestBuilding, calculateTimeSpent, calculateHeatData } from "./utils";
 import "leaflet.heat";
-
 import App from "./components/App.js";
 
 // renders React Component "Root" into the DOM element with ID "root"
@@ -63,6 +62,7 @@ map.on("click", function (event) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Interaction saved:", data);
+          getPath();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -86,6 +86,33 @@ function getUserHeatMap() {
     });
 }
 
+//const map = L.map('map').setView([0, 0], 2); // Set your initial map view
+//L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Function to fetch and display user interactions on the map
+async function displayUserInteractionstimestamp() {
+  try {
+    // Fetch user interactions using your API endpoint
+    const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
+    const interactions = await response.json();
+
+    // Iterate through interactions and add markers to the map
+    interactions.forEach((interaction) => {
+      const { lat, lng } = interaction;
+
+      // Create a marker with a popup (you can customize the popup content)
+      const marker = L.marker([lat, lng]).addTo(map);
+
+      // You can add a popup with custom content if needed
+      // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
+    });
+  } catch (error) {
+    console.error("Failed to fetch interactions: ", error);
+  }
+}
+
+
+
 // function getAllHeatMap() {
 //   fetch("/api/fetch-all-interactions")
 //     .then((response) => response.json())
@@ -103,3 +130,5 @@ function createHeatMap(heatMapData) {
     blur: 15,
   }).addTo(map);
 }
+
+window.getPath = displayUserInteractionstimestamp;

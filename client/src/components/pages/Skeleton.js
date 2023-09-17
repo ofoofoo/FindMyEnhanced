@@ -24,12 +24,12 @@ const Skeleton = ({ userName }) => {
       <div className="Button-holder">
         {userName ? (
           <>
-            {markShow ? (
+            {heatShow ? (
               <button
                 className="button-53"
                 onClick={() => {
                   clearHeatmap();
-                  showMarkers(0);
+                  showHeaters(0);
                 }}
               >
                 Hide Heat Map
@@ -39,7 +39,7 @@ const Skeleton = ({ userName }) => {
                 className="button-53"
                 onClick={() => {
                   getUserHeatMap();
-                  showMarkers(1);
+                  showHeaters(1);
                 }}
               >
                 Generate Heat Map

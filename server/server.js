@@ -4,16 +4,15 @@ validator.checkSetup();
 require("dotenv").config();
 
 const http = require("http");
-const express = require("express"); 
-const session = require("express-session"); 
+const express = require("express");
+const session = require("express-session");
 const mongoose = require("mongoose");
-const path = require("path"); 
+const path = require("path");
 
 const api = require("./api");
 const auth = require("./auth");
 
 const socketManager = require("./server-socket");
-
 
 mongo_username = process.env.MONGO_USERNAME;
 mongo_password = process.env.MONGO_PASSWORD;
@@ -94,7 +93,7 @@ app.use((err, req, res, next) => {
 });
 
 // hardcode port to 3000 for now
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.Server(app);
 socketManager.init(server);
 

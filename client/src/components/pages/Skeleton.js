@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
-import fetch from "node-fetch";
 
 import "../../index.js";
 import "../../utilities.css";
@@ -19,8 +17,8 @@ const Skeleton = ({ userName }) => {
       <div className="Hi-text">Hi there{userName ? ", " + userName : ""}!</div>
       <div className="Info-text">
         {userName
-          ? "Click on the map to log your location! Make sure to click closer to the center of the building you are in."
-          : "Log in to Log your location."}
+          ? "Click on the map to log your current location!"
+          : "Log in to log your location."}
       </div>
       <div className="Button-holder">
         {userName ? (

@@ -12,7 +12,9 @@ const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.goo
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container">
-      <div className="NavBar-title u-inlineBlock">MIT Heat Map</div>
+      <div className="NavBar-title u-inlineBlock">
+        <span className="gradient1-text"> MIT Heat Map</span>
+      </div>
       <div className="NavBar-linkContainer u-inlineBlock">
         <span className="NavBar-link NavBar-loginbutton">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>

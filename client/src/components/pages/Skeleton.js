@@ -22,7 +22,23 @@ const Skeleton = ({ userName }) => {
   return (
     <div className="Skeleton-Container">
       <div className="Hi-text">
-        Hi there, <span className="gradient-text">{userName ? + userName : ""}</span>!
+        <span>
+          <span>
+            Hi there
+            {userName ? (
+              <span>
+                ,{" "}
+                <span className="gradient-text">
+                  {" "}
+                  <span>{userName}</span>
+                </span>
+              </span>
+            ) : (
+              ""
+            )}
+          </span>
+          !
+        </span>
       </div>
       <div className="Info-text">
         {userName

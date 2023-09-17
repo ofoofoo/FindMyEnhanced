@@ -124,25 +124,6 @@ function getAllHeatMap() {
             .then((response) => response.json())
             .then((buildings) => {
               const heatMapData = createCompleteHeatMap(interactions, users, buildings);
-              console.log(heatMapData);
-              createHeatMap(heatMapData);
-            });
-        })
-    });
-}
-
-function getAllHeatMap() {
-  fetch("/api/fetch-users")
-    .then((response) => response.json())
-    .then((users) => {
-      fetch("/api/fetch-all-interactions")
-        .then((response) => response.json())
-        .then((interactions) => {
-          fetch("/buildings.json")
-            .then((response) => response.json())
-            .then((buildings) => {
-              const heatMapData = createCompleteHeatMap(interactions, users, buildings);
-              console.log(heatMapData);
               createHeatMap(heatMapData);
             });
         })

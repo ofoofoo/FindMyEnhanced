@@ -25,30 +25,29 @@ const Skeleton = ({ userName }) => {
           : "Log in to log your location."}
       </div>
       <div className="Button-holder">
+        {heatallShow ? (
+          <button
+            className="button-53"
+            onClick={() => {
+              clearMarkers();
+              showallHeaters(0);
+            }}
+          >
+            Hide Combined Heat Map
+          </button>
+        ) : (
+          <button
+            className="button-53"
+            onClick={() => {
+              displayUserInteractionstimestamp();
+              showallHeaters(1);
+            }}
+          >
+            Show Combined Heat Map
+          </button>
+        )}
         {userName ? (
           <>
-            {heatallShow ? (
-              <button
-                className="button-53"
-                onClick={() => {
-                  clearMarkers();
-                  showallHeaters(0);
-                }}
-              >
-                Hide Combined Heat Map
-              </button>
-            ) : (
-              <button
-                className="button-53"
-                onClick={() => {
-                  displayUserInteractionstimestamp();
-                  showallHeaters(1);
-                }}
-              >
-                Show Combined Heat Map
-              </button>
-            )}
-
             {heatShow ? (
               <button
                 className="button-53"
@@ -93,29 +92,7 @@ const Skeleton = ({ userName }) => {
             )}
           </>
         ) : (
-          <>
-            {heatallShow ? (
-              <button
-                className="button-53"
-                onClick={() => {
-                  clearMarkers();
-                  showallHeaters(0);
-                }}
-              >
-                Hide Combined Heat Map
-              </button>
-            ) : (
-              <button
-                className="button-53"
-                onClick={() => {
-                  displayUserInteractionstimestamp();
-                  showallHeaters(1);
-                }}
-              >
-                Show Combined Heat Map
-              </button>
-            )}
-          </>
+          <></>
         )}
       </div>
     </div>

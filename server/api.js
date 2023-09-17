@@ -78,13 +78,23 @@ router.post("/add-interaction", (req, res) => {
   });
 });
 
-router.get("/fetch-interactions", async (req, res) => {
+router.get("/fetch-user-interactions", async (req, res) => {
   const userId = req.user?._id;
   if (!userId) {
     return res.status(401).send({ msg: "User not logged in!" });
   }
   try {
-    const interactions = await Interaction.find({ user: userId }, "lat lng building -_id");
+    const interactions = await Interaction.find({ user: userId }, 'lat lng building timestamp -_id');
+    res.status(200).json(interactions);
+  } catch (err) {
+    console.error("Failed to get interactions:", err);
+    res.status(500).send({ msg: "Error fetching interactions:", err });
+  }
+});
+
+router.get("/fetch-all-interactions", async (req, res) => {
+  try {
+    const interactions = await Interaction.find({});
     res.status(200).json(interactions);
   } catch (err) {
     console.error("Failed to get interactions:", err);

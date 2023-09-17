@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import fetch from "node-fetch";
 
+import "../../index.js";
 import "../../utilities.css";
 import "./Skeleton.css";
 
@@ -19,7 +20,7 @@ const Skeleton = ({ userName }) => {
       </div>
       <div className="Button-holder">
         {userName ? (
-          <button className="button-53" onClick={() => {}}>
+          <button className="button-53" onClick={() => getUserHeatMap()}>
             Generate Heat Map
           </button>
         ) : (

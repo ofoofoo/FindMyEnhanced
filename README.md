@@ -1,5 +1,5 @@
 # MIT Heat Map
-Track your day-to-day location patterns at MIT with the [MIT Heat Map](INSERT_URL_HERE)!
+Track your day-to-day location patterns at MIT with the [MIT Heat Map](https://mit-heatmap-f60b83158200.herokuapp.com/)!
 
 Made by Abhay Bestrapalli, Orion Foo, Nathan Xiong, and Ram Goel.
 
@@ -10,8 +10,15 @@ As you walk around MIT's campus, login to [MIT Heat Map](INSERT_URL_HERE) and cl
 
 ## Features
 Our website has three main features for visualizing location data:
-* User Heat Map - displays a heat map for the user's location data. See where you spend most of your time!
-* Combined Heat Map - displays a heat map for all users' location data combined. See where everyone is spending most of their time!
-* Path Markers - displays a set of markers for where the user has been in that day, and draws a path indicating the user's path for that day. The path decreases in opacity as time progresses so you can understand your entire path easier. See where you've been today!
+* **User Heat Map** - displays a heat map for the user's location data. See where you spend most of your time!
+* **Combined Heat Map** - displays a heat map for all users' location data combined. See where everyone is spending most of their time!
+* **Path Markers** - displays a set of markers for where the user has been in that day, and draws a path indicating the user's path for that day. The path decreases in opacity as time progresses so you can understand your entire path easier. See where you've been today!
 
 We enable secure login with Google authentication. 
+
+## What we used
+We used the following technologies:
+* [Leaflet.js](https://leafletjs.com/) for providing map data, and for adding features to the map. 
+* [Express.js](https://expressjs.com/) for backend work. 
+* [MongoDB](https://www.mongodb.com/) for database work. 
+* 

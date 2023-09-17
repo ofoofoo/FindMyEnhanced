@@ -39,8 +39,7 @@
     "react-router-dom": "^6.7.0",
     "socket.io": "^4.5.4",
     "socket.io-client": "^4.5.4",
-    "url-loader": "^4.1.1",
-    "use-react-screenshot": "^3.0.0"
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

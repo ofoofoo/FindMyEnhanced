@@ -17,7 +17,9 @@ const Skeleton = ({ userName }) => {
 
   return (
     <div className="Skeleton-Container">
-      <div className="Hi-text">Hi there{userName ? ", " + userName : ""}!</div>
+      <div className="Hi-text">
+        Hi there<span className="gradient-text">{userName ? ", " + userName : ""}</span>!
+      </div>
       <div className="Info-text">
         {userName
           ? "Click on the map to log your location! Make sure to click closer to the center of the building you are in."

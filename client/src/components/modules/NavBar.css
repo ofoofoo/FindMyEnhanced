@@ -80,3 +80,13 @@ body {
     padding: 0.25em 0.75em;
   }
 }
+.gradient1-text {
+  margin-top: 96px;
+  font-family: "Mulish";
+  text-align: center;
+  font-size: 30px; /* Adjust the font size */
+  background: linear-gradient(45deg, #07e6f6, #a212d6); /* Define your gradient colors and angle */
+  -webkit-background-clip: text; /* Clip the gradient to the text */
+  background-clip: text;
+  font-weight: bold;
+}

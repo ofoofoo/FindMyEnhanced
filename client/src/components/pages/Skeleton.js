@@ -8,43 +8,25 @@ import "./Skeleton.css";
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
 
-const Skeleton = ({}) => {
+const Skeleton = ({ userName }) => {
   return (
-    <div className="Skeleton-Container">Hi!</div>
-    // <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-    //   {userId ? (
-    //     <button
-    //       onClick={() => {
-    //         googleLogout();
-    //         handleLogout();
-    //       }}
-    //     >
-    //       Logout
-    //     </button>
-    //   ) : (
-    //     <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
-    //   )}
-    //   <h1>Good luck on your project :)</h1>
-    //   <h2> What you need to change in this skeleton</h2>
-    //   <ul>
-    //     <li>
-    //       Change the Frontend CLIENT_ID (Skeleton.js) to your team's CLIENT_ID (obtain this at
-    //       http://weblab.is/clientid)
-    //     </li>
-    //     <li>Change the Server CLIENT_ID to the same CLIENT_ID (auth.js)</li>
-    //     <li>
-    //       Change the Database SRV (mongoConnectionURL) for Atlas (server.js). You got this in the
-    //       MongoDB setup.
-    //     </li>
-    //     <li>Change the Database Name for MongoDB to whatever you put in the SRV (server.js)</li>
-    //   </ul>
-    //   <h2>How to go from this skeleton to our actual app</h2>
-    //   <a href="https://docs.google.com/document/d/110JdHAn3Wnp3_AyQLkqH2W8h5oby7OVsYIeHYSiUzRs/edit?usp=sharing">
-    //     Check out this getting started guide
-    //   </a>
-
-    //   <></>
-    // </GoogleOAuthProvider>
+    <div className="Skeleton-Container">
+      <div className="Hi-text">Hi there{userName ? ", " + userName : ""}!</div>
+      <div className="Info-text">
+        {userName
+          ? "Click on the map to log your location! Make sure to click closer to the center of the building you are in."
+          : "Log in to Log your location."}
+      </div>
+      <div className="Button-holder">
+        {userName ? (
+          <button className="button-53" onClick={() => {}}>
+            Generate Heat Map
+          </button>
+        ) : (
+          <></>
+        )}
+      </div>
+    </div>
   );
 };
 

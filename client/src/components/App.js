@@ -18,6 +18,7 @@ import { get, post } from "../utilities";
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -34,12 +35,14 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      setUserName(user.name);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
 
   const handleLogout = () => {
     setUserId(undefined);
+    setUserName("");
     post("/api/logout");
   };
 
@@ -47,7 +50,7 @@ const App = () => {
     <>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Skeleton path="/" />} />
+        <Route path="/" element={<Skeleton path="/" userName={userName} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

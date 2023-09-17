@@ -35,7 +35,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Mooli";
+  font-family: "Mulish";
   font-weight: 300;
 }
 
@@ -91,8 +91,22 @@ form {
 }
 
 #map {
+  height: 60vh;
+  width: 80vw;
+  margin-top: 48px;
+  margin-left: 10vw;
+}
+/* .fixedMap {
   height: 80vh;
   width: 80vw;
   margin-top: 10vh;
   margin-left: 10vw;
+} */
+#infoStuff {
+  margin-top: 48px;
+  font: size 16px;
+  text-align: right;
+  margin-bottom: 24px;
+  margin-right: 48px;
+  font-family: "Mulish";
 }

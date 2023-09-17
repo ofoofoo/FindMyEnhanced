@@ -18,6 +18,7 @@
 .NavBar-title {
   color: var(--white);
   font-size: 20px;
+  font-family: "Mulish";
 }
 
 .NavBar-linkContainer {

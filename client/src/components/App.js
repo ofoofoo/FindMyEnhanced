@@ -53,6 +53,7 @@ const App = () => {
         <Route path="/" element={<Skeleton path="/" userName={userName} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <div className="fixedMap"></div>
     </>
   );
 };

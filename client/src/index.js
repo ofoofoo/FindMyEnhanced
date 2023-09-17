@@ -88,6 +88,12 @@ function getUserHeatMap() {
 
 //const map = L.map('map').setView([0, 0], 2); // Set your initial map view
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+// Create a LayerGroup to hold your markers
+const markerGroup = L.layerGroup().addTo(map);
+const heatmapGroup = L.layerGroup().addTo(map);
+// Call the clearMarkers function when you want to remove all markers
+// For example, you can call it when a "Clear Markers" button is clicked.
+// clearMarkers();
 
 // Function to fetch and display user interactions on the map
 export async function displayUserInteractionstimestamp() {
@@ -102,12 +108,11 @@ export async function displayUserInteractionstimestamp() {
       const { lat, lng } = interaction;
 
       // Create a marker with a popup (you can customize the popup content)
-      const marker = L.marker([lat, lng]).addTo(map);
+      const marker = L.marker([lat, lng]).addTo(markerGroup);
 
       // You can add a popup with custom content if needed
       // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
 
-      
       const lineCoordinates = [];
       // Add the coordinates to the lineCoordinates array
       // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
@@ -122,17 +127,16 @@ export async function displayUserInteractionstimestamp() {
             [lat, lng],
           ],
           { color: "blue", opacity: 0.5 } // Customize the line color
-        ).addTo(map);
+        ).addTo(markerGroup);
       }
-
-
     });
-
-
-
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
+}
+
+export function clearMarkers() {
+  markerGroup.clearLayers();
 }
 
 // Function to fetch and display user interactions on the map
@@ -195,7 +199,11 @@ function createHeatMap(heatMapData) {
   L.heatLayer(heatMapData, {
     radius: 25,
     blur: 15,
-  }).addTo(map);
+  }).addTo(heatmapGroup);
+}
+
+export function clearHeatmap() {
+  heatmapGroup.clearLayers();
 }
 
 window.getPath = displayUserInteractionstimestamp;

@@ -12,16 +12,40 @@ const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.goo
 const Skeleton = ({ userName }) => {
   const [markShow, showMarkers] = useState(0);
   const [heatShow, showHeaters] = useState(0);
+  const [heatallShow, showallHeaters] = useState(0);
 
   return (
     <div className="Skeleton-Container">
-      <div className="Hi-text">Hi there{userName ? ", " + userName : ""}!</div>
+      <div className="Hi-text">
+        Hi there<span className="gradient-text">{userName ? ", " + userName : ""}</span>!
+      </div>
       <div className="Info-text">
         {userName
           ? "Click on the map to log your current location!"
           : "Log in to log your location."}
       </div>
       <div className="Button-holder">
+        {heatallShow ? (
+          <button
+            className="button-53"
+            onClick={() => {
+              clearMarkers();
+              showallHeaters(0);
+            }}
+          >
+            Hide Combined Heat Map
+          </button>
+        ) : (
+          <button
+            className="button-53"
+            onClick={() => {
+              displayUserInteractionstimestamp();
+              showallHeaters(1);
+            }}
+          >
+            Show Combined Heat Map
+          </button>
+        )}
         {userName ? (
           <>
             {heatShow ? (
@@ -32,7 +56,7 @@ const Skeleton = ({ userName }) => {
                   showHeaters(0);
                 }}
               >
-                Hide Heat Map
+                Hide my Heat Map
               </button>
             ) : (
               <button
@@ -42,7 +66,7 @@ const Skeleton = ({ userName }) => {
                   showHeaters(1);
                 }}
               >
-                Generate Heat Map
+                Show my Heat Map
               </button>
             )}
             {markShow ? (

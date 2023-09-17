@@ -50,11 +50,12 @@ const Skeleton = ({ userName }) => {
       <div className="Explanation">
   <div className="centered-content">
   <span className="mulish-font">
-  As you walk around MIT's campus, login to <span style={{ color: 'red' }}>MIT Heat Map</span> and click on your location on the map.
-  Whenever you go to another building, <span style={{ color: 'red' }}>click the new location</span> on the map.
+  As you walk around MIT's campus, login to MIT Heat Map and click on your location on the map.
+  Whenever you go to another building, click the new location on the map.
   We track the time spent at each location and use it to display a heat map of where you spend most of your time on campus.
-  We also display the path of where you've visited throughout the day.
+  We also display the path of where you've visited throughout the day. <a href="https://github.com/ofoofoo/MITHeatMap" target="_blank" rel="noopener noreferrer">See our GitHub for more!</a>
 </span>
+
 
   </div>
 </div>

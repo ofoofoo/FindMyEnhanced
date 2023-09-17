@@ -160,7 +160,7 @@ export async function displayUserInteractionstimestamp() {
         ).addTo(markerGroup);
       }
 
-      // Increment the marker number
+      marker._icon.querySelector('span').style.color = 'red';
       markerNumber++;
 
       // Decrease initialOpacity for the next interaction
@@ -184,15 +184,30 @@ async function displayUserInteractions() {
     const lineCoordinates = [];
     const dotIcon = L.divIcon({ className: 'dot-icon' }); 
 
-
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
-      const marker = L.marker([lat, lng]).addTo(map);
+      let markerText = ''; // Initialize marker text
+
+      // Determine if this is the first or last interaction
+      if (index === 0) {
+        markerText = 'Start';
+      } else if (index === interactions.length - 1) {
+        markerText = 'End';
+      } else {
+        markerText = (index + 1).toString(); // Use (index + 1) for intermediate interactions
+      }
+
+      // Create a marker with the markerText as HTML content
+      const marker = L.marker([lat, lng], {
+        icon: L.divIcon({
+          className: 'numbered-marker', // Apply the custom CSS class
+          html: `<span style="font-weight: bold;">${markerText}</span>`, // Bold the marker text directly in HTML
+        }),
+      }).addTo(map);
 
       lineCoordinates.push([lat, lng]);
 
-      console.log(interactions);
       if (index > 0) {
         const previousInteraction = interactions[index - 1];
         const polyline = L.polyline(
@@ -212,6 +227,8 @@ async function displayUserInteractions() {
     console.error("Failed to fetch interactions: ", error);
   }
 }
+
+
 
 function createHeatMap(heatMapData) {
   L.heatLayer(heatMapData, {

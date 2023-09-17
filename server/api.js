@@ -102,6 +102,17 @@ router.get("/fetch-all-interactions", async (req, res) => {
   }
 });
 
+router.delete("/remove-interaction/:id", async (req, res) => {
+  const interactionId = req.params.id;
+  try {
+    await Interaction.findByIdAndRemove(interactionId);
+    res.status(200).send({ msg: "Successfully deleted interaction" });
+  } catch (err) {
+    console.error("Failed to delete interaction:", err);
+    res.status(500).send({ msg: "Error deleting interaction:", err });
+  }
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

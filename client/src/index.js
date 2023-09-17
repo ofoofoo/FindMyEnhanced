@@ -22,6 +22,9 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
+// popup/undo shit
+let loggedInteractions = [];
+
 map.on("click", function (event) {
   var lat = event.latlng.lat;
   var lng = event.latlng.lng;
@@ -35,18 +38,20 @@ map.on("click", function (event) {
         popup1.setLatLng(event.latlng).setContent("No MIT buildings nearby!").openOn(map);
         return;
       }
+
+      // undo button shit
+      const popupContent = document.createElement('div');
+      popupContent.innerHTML = `You've logged a visit at ${building} `;
+      const undoButton = document.createElement('button');
+      undoButton.innerHTML = 'Undo';
+      undoButton.id = 'undoBtn';
+      undoButton.addEventListener('click', undoLastInteraction);
+      popupContent.appendChild(undoButton);
+
       var popup = L.popup();
       popup
         .setLatLng(event.latlng)
-        .setContent(
-          "You've logged a visit at " +
-            building +
-            " (" +
-            lat.toFixed(7) +
-            ", " +
-            lng.toFixed(7) +
-            ")"
-        )
+        .setContent(popupContent)
         .openOn(map);
 
       console.log("Lat:", lat, "Lng:", lng, "Building:", building);
@@ -61,6 +66,7 @@ map.on("click", function (event) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Interaction saved:", data);
+          loggedInteractions.push(data._id);
           // getPath();
         })
         .catch((error) => {
@@ -68,6 +74,27 @@ map.on("click", function (event) {
         });
     });
 });
+
+function undoLastInteraction() {
+  const lastInteractionId = loggedInteractions.pop();
+
+  if (!lastInteractionId) {
+    console.log("No interactions to undo.");
+    return;
+  }
+
+  fetch(`/api/remove-interaction/${lastInteractionId}`, {
+    method: 'DELETE',
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Interaction removed:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
 
 function getUserHeatMap() {
   fetch("/api/fetch-user-interactions")
@@ -165,23 +192,12 @@ async function displayUserInteractions() {
   }
 }
 
-// Call the function to display user interactions on the map
-
-// function getAllHeatMap() {
-//   fetch("/api/fetch-all-interactions")
-//     .then((response) => response.json())
-//     .then((data) => {
-//       createHeatMap(data);
-//     })
-//     .catch((err) => {
-//       console.error("Error fetching interactions:", err);
-//     })
-// }
-
 function createHeatMap(heatMapData) {
   L.heatLayer(heatMapData, {
-    radius: 25,
-    blur: 15,
+    radius: 30,
+    blur: 40,
+    maxZoom: 15,
+    useLocalExtrema: true,
   }).addTo(heatmapGroup);
 }
 
@@ -189,5 +205,5 @@ export function clearHeatmap() {
   heatmapGroup.clearLayers();
 }
 
-window.getPath = displayUserInteractionstimestamp;
 window.getUserHeatMap = getUserHeatMap;
+window.getPath = displayUserInteractionstimestamp;

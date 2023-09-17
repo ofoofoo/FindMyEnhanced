@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
-import fetch from "node-fetch";
 
 import "../../index.js";
 import "../../utilities.css";
@@ -22,18 +20,18 @@ const Skeleton = ({ userName }) => {
       </div>
       <div className="Info-text">
         {userName
-          ? "Click on the map to log your location! Make sure to click closer to the center of the building you are in."
-          : "Log in to Log your location."}
+          ? "Click on the map to log your current location!"
+          : "Log in to log your location."}
       </div>
       <div className="Button-holder">
         {userName ? (
           <>
-            {markShow ? (
+            {heatShow ? (
               <button
                 className="button-53"
                 onClick={() => {
                   clearHeatmap();
-                  showMarkers(0);
+                  showHeaters(0);
                 }}
               >
                 Hide Heat Map
@@ -43,7 +41,7 @@ const Skeleton = ({ userName }) => {
                 className="button-53"
                 onClick={() => {
                   getUserHeatMap();
-                  showMarkers(1);
+                  showHeaters(1);
                 }}
               >
                 Generate Heat Map

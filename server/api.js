@@ -36,7 +36,7 @@ router.get("/fetch-interactions-timestamp", async (req, res) => {
 
   // Calculate the timestamp for 10:00 PM today
   const today = new Date();
-  today.setHours(22, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
 
   // Calculate the timestamp for 10:00 PM of the next day
   const tomorrow = new Date(today);

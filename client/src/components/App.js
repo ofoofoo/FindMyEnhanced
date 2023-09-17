@@ -37,6 +37,8 @@ const App = () => {
       setUserId(user._id);
       setUserName(user.name);
       post("/api/initsocket", { socketid: socket.id });
+    }).catch((err) => {
+      console.error("Error logging in:", err);
     });
   };
 

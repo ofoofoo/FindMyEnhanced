@@ -119,6 +119,16 @@ router.delete("/remove-interaction/:id", async (req, res) => {
   }
 });
 
+router.get("/fetch-users", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (err) {
+    console.error("Failed to get users:", err);
+    res.status(500).send({ msg: "Error fetching users:", err });
+  }
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

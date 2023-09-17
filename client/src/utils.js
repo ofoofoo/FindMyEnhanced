@@ -39,11 +39,10 @@ export function getClosestBuilding(lat, lon, radius, buildings) {
     return closestBuilding ? closestBuilding : "None";
 }
 
-export function calculateHeatData(interactions, buildings) {
+export function calculateTimeSpent(interactions) {
     interactions.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
     const timeSpent = {};
-    const normalizedTimeSpent = {};
     let totalTime = 0;
 
     for (let i = 0; i < interactions.length; i++) {
@@ -66,8 +65,49 @@ export function calculateHeatData(interactions, buildings) {
         }
     }
 
+    return { timeSpent, totalTime };
+}
+
+export function calculateHeatData(interactions, buildings) {
+    const normalizedTimeSpent = {};
+    const { timeSpent, totalTime } = calculateTimeSpent(interactions);
+
     for (const key in timeSpent) {
         normalizedTimeSpent[key] = timeSpent[key] / totalTime;
+    }
+
+    const heatMapData = [];
+    for (const buildingName in buildings) {
+        const building = buildings[buildingName];
+        const normalizedTime = normalizedTimeSpent[buildingName];
+        if (normalizedTime !== undefined) {
+            heatMapData.push([building.latitude, building.longitude, 5 + Math.sqrt(normalizedTime)]);
+        }
+    }
+
+    return heatMapData;
+}
+
+export function createCompleteHeatMap(interactions, users, buildings) {
+    const normalizedTimeSpent = {};
+    let totalTime = 0;
+
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        const userInteractions = interactions.filter((interaction) => interaction.user === user._id);
+        const { timeSpent, userTime } = calculateTimeSpent(userInteractions);
+        totalTime += userTime;
+
+        for (const key in timeSpent) {
+            if (!normalizedTimeSpent[key]) {
+                normalizedTimeSpent[key] = 0;
+            }
+            normalizedTimeSpent[key] += timeSpent[key];
+        }
+    }
+
+    for (const key in normalizedTimeSpent) {
+        normalizedTimeSpent[key] /= totalTime;
     }
 
     const heatMapData = [];

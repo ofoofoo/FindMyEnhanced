@@ -29,7 +29,7 @@ const Skeleton = ({ userName }) => {
           <button
             className="button-53"
             onClick={() => {
-              clearMarkers();
+              clearHeatmap();
               showallHeaters(0);
             }}
           >
@@ -39,7 +39,7 @@ const Skeleton = ({ userName }) => {
           <button
             className="button-53"
             onClick={() => {
-              displayUserInteractionstimestamp();
+              getAllHeatMap();
               showallHeaters(1);
             }}
           >

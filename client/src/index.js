@@ -85,26 +85,47 @@ function getHeatMap() {
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 // Function to fetch and display user interactions on the map
-async function displayUserInteractionstimestamp() {
+async function displayUserInteractions() {
   try {
     // Fetch user interactions using your API endpoint
     const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
     const interactions = await response.json();
 
+    // Create an array to store coordinates for drawing lines
+    const lineCoordinates = [];
+
     // Iterate through interactions and add markers to the map
-    interactions.forEach((interaction) => {
+    interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
       // Create a marker with a popup (you can customize the popup content)
       const marker = L.marker([lat, lng]).addTo(map);
 
-      // You can add a popup with custom content if needed
-      // marker.bindPopup(`Building: ${interaction.building}`).openPopup();
+      // Add the coordinates to the lineCoordinates array
+      lineCoordinates.push([lat, lng]);
+
+      // Connect consecutive markers with lines (starting from the second marker)
+      if (index > 0) {
+        const previousInteraction = interactions[index - 1];
+        const polyline = L.polyline(
+          [
+            [previousInteraction.lat, previousInteraction.lng],
+            [lat, lng],
+          ],
+          { color: 'blue' } // Customize the line color
+        ).addTo(map);
+      }
     });
+
+    // Create a polyline connecting all interactions
+    if (lineCoordinates.length > 1) {
+      const fullPolyline = L.polyline(lineCoordinates, { color: 'red' }).addTo(map);
+    }
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
 }
+
 
 // Call the function to display user interactions on the map
 

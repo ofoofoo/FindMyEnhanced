@@ -17,7 +17,7 @@ const Skeleton = ({ userName }) => {
   return (
     <div className="Skeleton-Container">
       <div className="Hi-text">
-        Hi there<span className="gradient-text">{userName ? ", " + userName : ""}</span>!
+        Hi there, <span className="gradient-text">{userName ? + userName : ""}</span>!
       </div>
       <div className="Info-text">
         {userName

@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { getClosestBuilding, calculateTimeSpent, calculateHeatData } from "./utils";
+import { getClosestBuilding, calculateTimeSpent, calculateHeatData, createCompleteHeatMap } from "./utils";
 import "leaflet.heat";
 import App from "./components/App.js";
 
@@ -31,7 +31,7 @@ map.on("click", function (event) {
   fetch("/buildings.json")
     .then((response) => response.json())
     .then((data) => {
-      const building = getClosestBuilding(lat, lng, 1, data);
+      const building = getClosestBuilding(lat, lng, 0.2, data);
       if (building === "None") {
         console.log("No building found");
         var popup1 = L.popup();
@@ -89,6 +89,7 @@ function undoLastInteraction() {
     .then((response) => response.json())
     .then((data) => {
       console.log("Interaction removed:", data);
+      map.closePopup();
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -112,6 +113,24 @@ function getUserHeatMap() {
     });
 }
 
+function getAllHeatMap() {
+  fetch("/api/fetch-users")
+    .then((response) => response.json())
+    .then((users) => {
+      fetch("/api/fetch-all-interactions")
+        .then((response) => response.json())
+        .then((interactions) => {
+          fetch("/buildings.json")
+            .then((response) => response.json())
+            .then((buildings) => {
+              const heatMapData = createCompleteHeatMap(interactions, users, buildings);
+              console.log(heatMapData);
+              createHeatMap(heatMapData);
+            });
+        })
+    });
+}
+
 //const map = L.map('map').setView([0, 0], 2); // Set your initial map view
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
@@ -119,13 +138,13 @@ const heatmapGroup = L.layerGroup().addTo(map);
 
 export async function displayUserInteractionstimestamp() {
   try {
-    const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
+    const response = await fetch("/api/fetch-interactions-timestamp");
     const interactions = await response.json();
     interactions.sort((a, b) => a.timestamp - b.timestamp);
 
     let initialOpacity = 1.0;
 
-    const opacityReductionRate = 0.008; // Adjust this value as needed
+    const opacityReductionRate = 0.008;
 
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
@@ -142,7 +161,7 @@ export async function displayUserInteractionstimestamp() {
             [previousInteraction.lat, previousInteraction.lng],
             [lat, lng],
           ],
-          { color: "blue", opacity: opacity } 
+          { color: "blue", opacity: opacity }
         ).addTo(markerGroup);
       }
 
@@ -179,7 +198,7 @@ async function displayUserInteractions() {
             [previousInteraction.lat, previousInteraction.lng],
             [lat, lng],
           ],
-          { color: "blue" } 
+          { color: "blue" }
         ).addTo(map);
       }
     });
@@ -207,3 +226,4 @@ export function clearHeatmap() {
 
 window.getUserHeatMap = getUserHeatMap;
 window.getPath = displayUserInteractionstimestamp;
+window.getAllHeatMap = getAllHeatMap;

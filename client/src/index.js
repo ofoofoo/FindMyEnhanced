@@ -5,7 +5,6 @@ import { getClosestBuilding, calculateTimeSpent, calculateHeatData } from "./uti
 import "leaflet.heat";
 import App from "./components/App.js";
 
-// renders React Component "Root" into the DOM element with ID "root"
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
@@ -88,44 +87,27 @@ function getUserHeatMap() {
 
 //const map = L.map('map').setView([0, 0], 2); // Set your initial map view
 //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-// Create a LayerGroup to hold your markers
 const markerGroup = L.layerGroup().addTo(map);
 const heatmapGroup = L.layerGroup().addTo(map);
-// Call the clearMarkers function when you want to remove all markers
-// For example, you can call it when a "Clear Markers" button is clicked.
-// clearMarkers();
 
-// Function to fetch and display user interactions on the map
 export async function displayUserInteractionstimestamp() {
   try {
-    // Fetch user interactions using your API endpoint
     const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
     const interactions = await response.json();
     interactions.sort((a, b) => a.timestamp - b.timestamp);
 
-    // Define the initial opacity
     let initialOpacity = 1.0;
 
-    // Define a rate of opacity reduction
     const opacityReductionRate = 0.008; // Adjust this value as needed
 
-    // Iterate through interactions and add markers to the map
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
-      // Create a marker with a popup (you can customize the popup content)
       const marker = L.marker([lat, lng]).addTo(markerGroup);
-
-      // Create an array to store coordinates for drawing lines
       const lineCoordinates = [];
-
-      // Add the coordinates to the lineCoordinates array
       lineCoordinates.push([lat, lng]);
-
-      // Calculate the opacity based on the timestamp
       const opacity = initialOpacity - index * opacityReductionRate;
 
-      // Connect consecutive markers with lines (starting from the second marker)
       if (index > 0) {
         const previousInteraction = interactions[index - 1];
         const polyline = L.polyline(
@@ -133,11 +115,10 @@ export async function displayUserInteractionstimestamp() {
             [previousInteraction.lat, previousInteraction.lng],
             [lat, lng],
           ],
-          { color: "blue", opacity: opacity } // Set the calculated opacity
+          { color: "blue", opacity: opacity } 
         ).addTo(markerGroup);
       }
 
-      // Update the initial opacity for the next interaction
       initialOpacity = opacity;
     });
   } catch (error) {
@@ -150,27 +131,19 @@ export function clearMarkers() {
   markerGroup.clearLayers();
 }
 
-// Function to fetch and display user interactions on the map
 async function displayUserInteractions() {
   try {
-    // Fetch user interactions using your API endpoint
     const response = await fetch("/api/fetch-interactions-timestamp"); // Update the URL to your API endpoint
     const interactions = await response.json();
-
-    // Create an array to store coordinates for drawing lines
     const lineCoordinates = [];
 
-    // Iterate through interactions and add markers to the map
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
-      // Create a marker with a popup (you can customize the popup content)
       const marker = L.marker([lat, lng]).addTo(map);
 
-      // Add the coordinates to the lineCoordinates array
       lineCoordinates.push([lat, lng]);
 
-      // Connect consecutive markers with lines (starting from the second marker)
       console.log(interactions);
       if (index > 0) {
         const previousInteraction = interactions[index - 1];
@@ -179,12 +152,11 @@ async function displayUserInteractions() {
             [previousInteraction.lat, previousInteraction.lng],
             [lat, lng],
           ],
-          { color: "blue" } // Customize the line color
+          { color: "blue" } 
         ).addTo(map);
       }
     });
 
-    // Create a polyline connecting all interactions
     if (lineCoordinates.length > 1) {
       const fullPolyline = L.polyline(lineCoordinates, { color: "red" }).addTo(map);
     }

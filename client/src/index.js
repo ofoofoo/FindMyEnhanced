@@ -185,6 +185,15 @@ export function clearMarkers() {
   markerGroup.clearLayers();
 }
 
+function createHeatMap(heatMapData) {
+  L.heatLayer(heatMapData, {
+    radius: 30,
+    blur: 40,
+    maxZoom: 15,
+    useLocalExtrema: true,
+  }).addTo(heatmapGroup);
+}
+
 async function displayUserInteractions() {
   try {
     const response = await fetch("/api/fetch-interactions-timestamp");
@@ -202,14 +211,13 @@ async function displayUserInteractions() {
       } else if (index === interactions.length - 1) {
         markerText = "End";
       } else {
-        markerText = (index + 1).toString(); // Use (index + 1) for intermediate interactions
+        markerText = (index + 1).toString(); 
       }
 
-      // Create a marker with the markerText as HTML content
       const marker = L.marker([lat, lng], {
         icon: L.divIcon({
-          className: "numbered-marker", // Apply the custom CSS class
-          html: `<span style="font-weight: bold;">${markerText}</span>`, // Bold the marker text directly in HTML
+          className: "numbered-marker", 
+          html: `<span style="font-weight: bold;">${markerText}</span>`, 
         }),
       }).addTo(map);
 
@@ -233,15 +241,6 @@ async function displayUserInteractions() {
   } catch (error) {
     console.error("Failed to fetch interactions: ", error);
   }
-}
-
-function createHeatMap(heatMapData) {
-  L.heatLayer(heatMapData, {
-    radius: 30,
-    blur: 40,
-    maxZoom: 15,
-    useLocalExtrema: true,
-  }).addTo(heatmapGroup);
 }
 
 function createallHeatMap(heatMapData) {

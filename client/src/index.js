@@ -77,54 +77,6 @@ map.on("click", function (event) {
     });
 });
 
-async function displayUserInteractions() {
-  try {
-    const response = await fetch("/api/fetch-interactions-timestamp");
-    const interactions = await response.json();
-    const lineCoordinates = [];
-    const dotIcon = L.divIcon({ className: "dot-icon" });
-
-    interactions.forEach((interaction, index) => {
-      const { lat, lng } = interaction;
-
-      let markerText = ""; 
-
-      if (index === 0) {
-        markerText = "Start";
-      } else if (index === interactions.length - 1) {
-        markerText = "End";
-      } else {
-        markerText = (index + 1).toString(); 
-      }
-
-      const marker = L.marker([lat, lng], {
-        icon: L.divIcon({
-          className: "numbered-marker", 
-          html: `<span style="font-weight: bold;">${markerText}</span>`, 
-        }),
-      }).addTo(map);
-
-      lineCoordinates.push([lat, lng]);
-
-      if (index > 0) {
-        const previousInteraction = interactions[index - 1];
-        const polyline = L.polyline(
-          [
-            [previousInteraction.lat, previousInteraction.lng],
-            [lat, lng],
-          ],
-          { color: "blue" }
-        ).addTo(map);
-      }
-    });
-
-    if (lineCoordinates.length > 1) {
-      const fullPolyline = L.polyline(lineCoordinates, { color: "red" }).addTo(map);
-    }
-  } catch (error) {
-    console.error("Failed to fetch interactions: ", error);
-  }
-}
 
 function undoLastInteraction() {
   const lastInteractionId = loggedInteractions.pop();

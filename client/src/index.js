@@ -131,8 +131,6 @@ function getAllHeatMap() {
     });
 }
 
-//const map = L.map('map').setView([0, 0], 2);
-//L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 const markerGroup = L.layerGroup().addTo(map);
 const heatmapGroup = L.layerGroup().addTo(map);
 const heatallmapGroup = L.layerGroup().addTo(map);
@@ -143,29 +141,23 @@ export async function displayUserInteractionstimestamp() {
     const interactions = await response.json();
     interactions.sort((a, b) => a.timestamp - b.timestamp);
 
-    // Initialize markerNumber and initialOpacity
     let markerNumber = 1;
     let initialOpacity = 1.0;
-
-    // Define the opacity reduction rate to reach 0.1
     const opacityReductionRate = (1.0 - 0.1) / interactions.length;
 
     interactions.forEach((interaction) => {
       const { lat, lng } = interaction;
 
-      // Create a marker with a numbered DivIcon
       const marker = L.marker([lat, lng], {
         icon: L.divIcon({
-          className: "numbered-marker", // Define a CSS class for styling
-          html: `<span style="font-weight: bold; margin-left: -5px; margin-top: 5px;">${markerNumber}</span>`, // Adjust margin-left to move the numbers to the left
+          className: "numbered-marker", 
+          html: `<span style="font-weight: bold; margin-left: -5px; margin-top: 5px;">${markerNumber}</span>`, 
         }),
       }).addTo(markerGroup);
 
-      // Create an array to store coordinates for drawing lines
       const lineCoordinates = [];
       lineCoordinates.push([lat, lng]);
 
-      // Calculate the opacity based on initialOpacity
       const opacity = initialOpacity;
 
       if (markerNumber > 1) {
@@ -182,7 +174,6 @@ export async function displayUserInteractionstimestamp() {
       marker._icon.querySelector("span").style.color = "red";
       markerNumber++;
 
-      // Decrease initialOpacity for the next interaction
       initialOpacity -= opacityReductionRate;
     });
   } catch (error) {
@@ -204,9 +195,8 @@ async function displayUserInteractions() {
     interactions.forEach((interaction, index) => {
       const { lat, lng } = interaction;
 
-      let markerText = ""; // Initialize marker text
+      let markerText = ""; 
 
-      // Determine if this is the first or last interaction
       if (index === 0) {
         markerText = "Start";
       } else if (index === interactions.length - 1) {
